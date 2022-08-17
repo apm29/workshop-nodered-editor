@@ -174,7 +174,7 @@ function handleDeploy() {
 }
 </script>
 
-<style>
+<style lang="scss">
 .x6-edge-selected {
   path {
     stroke: orange !important;

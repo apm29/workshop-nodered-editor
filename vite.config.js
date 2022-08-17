@@ -15,6 +15,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'element-ui': ['element-ui'],
+          '@antv/x6': ['@antv/x6'],
         },
       },
     },

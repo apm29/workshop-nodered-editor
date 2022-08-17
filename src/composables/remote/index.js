@@ -1,7 +1,5 @@
 import axios from "axios";
 import qs from "qs";
-import { uuid } from "./encrypt";
-
 axios.defaults.withCredentials = true; // 是否允许跨域
 axios.defaults.timeout = 20000;
 axios.defaults.baseURL =
@@ -50,39 +48,6 @@ const remote = {
     return await this.request(option);
   },
 
-  exportStream: async function (option) {
-    const exportOptions = {
-      method: "POST",
-      responseType: "blob",
-      fileMime: "application/vnd.ms-excel",
-      intercept: false,
-    };
-    option = Object.assign({}, Utils.defaultOption, exportOptions, option);
-    return axios.request(option).then((res) => {
-      const link = document.createElement("a");
-      let blob = new Blob([res.data], { type: option.fileMime });
-      link.style.display = "none";
-      link.href = URL.createObjectURL(blob);
-      let header =
-        res.headers["content-disposition"] ||
-        res.headers["Content-Disposition"];
-      let fileName;
-      if (header) {
-        try {
-          fileName = decodeURIComponent(header.split(";")[1].split("=")[1]);
-        } catch (e) {
-          console.error(e);
-          fileName = `${uuid()}.xlsx`;
-        }
-      } else {
-        fileName = `${uuid()}.xlsx`;
-      }
-      link.download = fileName || option.fileName; //下载后文件名
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-  },
 
   get: async function (option) {
     const getOptions = {

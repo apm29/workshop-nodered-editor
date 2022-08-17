@@ -1,6 +1,6 @@
 import path from 'path'
 import { defineConfig } from 'vite'
-import VuePlugin from '@vitejs/plugin-vue2'
+import vitePluginVue from '@vitejs/plugin-vue2'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementUiResolver } from 'unplugin-vue-components/resolvers'
@@ -19,35 +19,27 @@ export default defineConfig({
       },
     },
   },
+  optimizeDeps: {
+    exclude: ['@antv/x6-vue-shape'],
+  },
   resolve: {
+    // 忽略后缀名的配置选项, 添加 .vue 选项时要记得原本默认忽略的选项也要手动写入
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     alias: [
       {
         find: '~/',
         replacement: `${path.resolve(__dirname, 'src')}/`,
       },
-      // '@antv/x6-vue-shape': '@antv/x6-vue-shape/dist/x6-vue-shape.js',
-      {
-        find: '@antv/x6',
-        replacement: '@antv/x6/lib',
-      },
-      {
-        find: '@antv/x6-vue-shape',
-        replacement: '@antv/x6-vue-shape/lib',
-      },
     ]
   },
   plugins: [
-    VuePlugin(),
+    vitePluginVue(),
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: [
         'vue',
         'vue/macros',
-        'vue-router',
         '@vueuse/core',
-        {
-          'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
-        },
       ],
       dts: true,
       dirs: [
@@ -61,6 +53,7 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+
     legacy({
       targets: ['defaults', 'not ie < 9'],
     }),

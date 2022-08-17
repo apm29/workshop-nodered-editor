@@ -1,8 +1,9 @@
 import Vue from "vue";
-import '~/style.css'
 import App from '~/App.vue'
 import '@unocss/reset/tailwind.css'
+import '~/style.css'
 import 'uno.css'
+import 'element-ui/lib/theme-chalk/index.css';
 
 const app = new Vue({
   render: (h) => h(App),

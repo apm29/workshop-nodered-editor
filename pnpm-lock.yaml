@@ -8,12 +8,15 @@ specifiers:
   '@unocss/reset': ^0.45.6
   '@vitejs/plugin-legacy': ^2.0.1
   '@vitejs/plugin-vue2': ^1.1.2
+  '@vue/composition-api': ^1.7.0
   '@vue/runtime-dom': ^3.2.37
   '@vueuse/core': ^9.1.0
   axios: ^0.27.2
+  camelcase: ^7.0.0
   clipboard: ^2.0.11
   dayjs: ^1.11.4
   echarts: ^5.3.3
+  element-ui: ^2.15.9
   jsdom: ^20.0.0
   lodash: ^4.17.21
   nprogress: ^0.2.0
@@ -26,22 +29,29 @@ specifiers:
   unplugin-vue-components: ^0.22.4
   vite: ^3.0.6
   vue: 2.7.8
+  vue-demi: ^0.13.8
   vue-json-viewer: ^2.2.2
+  vue-monaco-editor: ^0.0.19
+  vuedraggable: ^2.24.3
   webpack: '5'
 
 dependencies:
   '@antv/x6': registry.npmmirror.com/@antv/x6/1.33.1
-  '@antv/x6-vue-shape': registry.npmmirror.com/@antv/x6-vue-shape/1.4.2_@antv+x6@1.33.1+vue@2.7.8
-  '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.1.0_vue@2.7.8
+  '@antv/x6-vue-shape': registry.npmmirror.com/@antv/x6-vue-shape/1.4.2_ts5pfmpdskz6oqbrinve435rmq
+  '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.1.0_iuxdnhjofcm4hv6qrvss4y7q7m
   axios: registry.npmmirror.com/axios/0.27.2
+  camelcase: registry.npmmirror.com/camelcase/7.0.0
   clipboard: registry.npmmirror.com/clipboard/2.0.11
   dayjs: registry.npmmirror.com/dayjs/1.11.4
   echarts: registry.npmmirror.com/echarts/5.3.3
+  element-ui: registry.npmmirror.com/element-ui/2.15.9_vue@2.7.8
   lodash: registry.npmmirror.com/lodash/4.17.21
   nprogress: registry.npmmirror.com/nprogress/0.2.0
   qs: registry.npmmirror.com/qs/6.11.0
   vue: registry.npmmirror.com/vue/2.7.8
   vue-json-viewer: registry.npmmirror.com/vue-json-viewer/2.2.22_vue@2.7.8
+  vue-monaco-editor: registry.npmmirror.com/vue-monaco-editor/0.0.19
+  vuedraggable: registry.npmmirror.com/vuedraggable/2.24.3
 
 devDependencies:
   '@iconify-json/carbon': registry.npmmirror.com/@iconify-json/carbon/1.1.7
@@ -49,6 +59,7 @@ devDependencies:
   '@unocss/reset': registry.npmmirror.com/@unocss/reset/0.45.6
   '@vitejs/plugin-legacy': registry.npmmirror.com/@vitejs/plugin-legacy/2.0.1_terser@5.14.2+vite@3.0.7
   '@vitejs/plugin-vue2': registry.npmmirror.com/@vitejs/plugin-vue2/1.1.2_vite@3.0.7+vue@2.7.8
+  '@vue/composition-api': registry.npmmirror.com/@vue/composition-api/1.7.0_vue@2.7.8
   '@vue/runtime-dom': registry.npmmirror.com/@vue/runtime-dom/3.2.37
   jsdom: registry.npmmirror.com/jsdom/20.0.0
   sass: registry.npmmirror.com/sass/1.54.4
@@ -58,6 +69,7 @@ devDependencies:
   unplugin-auto-import: registry.npmmirror.com/unplugin-auto-import/0.11.1_2a5dk4ynon6dlglbo243bu4iii
   unplugin-vue-components: registry.npmmirror.com/unplugin-vue-components/0.22.4_hfkh4blymcg5b6lvdusgr7scoq
   vite: registry.npmmirror.com/vite/3.0.7_sass@1.54.4+terser@5.14.2
+  vue-demi: registry.npmmirror.com/vue-demi/0.13.8_iuxdnhjofcm4hv6qrvss4y7q7m
   webpack: registry.npmmirror.com/webpack/5.74.0
 
 packages:
@@ -87,7 +99,7 @@ packages:
     version: 0.5.2
     dev: true
 
-  registry.npmmirror.com/@antv/x6-vue-shape/1.4.2_@antv+x6@1.33.1+vue@2.7.8:
+  registry.npmmirror.com/@antv/x6-vue-shape/1.4.2_ts5pfmpdskz6oqbrinve435rmq:
     resolution: {integrity: sha512-2V0MjZ/rE2xIURNzl54I5OywcbbsbgLXfG7ko/69WRRbISTbSdYQRfOPseO19KIpHHZlGj00HIDad0JyHnN6vQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@antv/x6-vue-shape/-/x6-vue-shape-1.4.2.tgz}
     id: registry.npmmirror.com/@antv/x6-vue-shape/1.4.2
     name: '@antv/x6-vue-shape'
@@ -101,8 +113,9 @@ packages:
         optional: true
     dependencies:
       '@antv/x6': registry.npmmirror.com/@antv/x6/1.33.1
+      '@vue/composition-api': registry.npmmirror.com/@vue/composition-api/1.7.0_vue@2.7.8
       vue: registry.npmmirror.com/vue/2.7.8
-      vue-demi: registry.npmmirror.com/vue-demi/0.13.8_vue@2.7.8
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.8_iuxdnhjofcm4hv6qrvss4y7q7m
     dev: false
 
   registry.npmmirror.com/@antv/x6/1.33.1:
@@ -576,6 +589,16 @@ packages:
       postcss: registry.npmmirror.com/postcss/8.4.16
       source-map: registry.npmmirror.com/source-map/0.6.1
 
+  registry.npmmirror.com/@vue/composition-api/1.7.0_vue@2.7.8:
+    resolution: {integrity: sha512-hxOgLYR+wjuPX9bkP2pAPlqUs98XxBoa9DSLyp1z6+YR92wC42PZcZKs4d+VRtcv4udOv041Kss+F6ap5nj8YA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/composition-api/-/composition-api-1.7.0.tgz}
+    id: registry.npmmirror.com/@vue/composition-api/1.7.0
+    name: '@vue/composition-api'
+    version: 1.7.0
+    peerDependencies:
+      vue: '>= 2.5 < 2.7'
+    dependencies:
+      vue: registry.npmmirror.com/vue/2.7.8
+
   registry.npmmirror.com/@vue/reactivity/3.2.37:
     resolution: {integrity: sha512-/7WRafBOshOc6m3F7plwzPeCu/RCVv9uMpOwa/5PiY1Zz+WLVRWiy0MYKwmg19KBdGtFWsmZ4cD+LOdVPcs52A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/reactivity/-/reactivity-3.2.37.tgz}
     name: '@vue/reactivity'
@@ -609,7 +632,7 @@ packages:
     version: 3.2.37
     dev: true
 
-  registry.npmmirror.com/@vueuse/core/9.1.0_vue@2.7.8:
+  registry.npmmirror.com/@vueuse/core/9.1.0_iuxdnhjofcm4hv6qrvss4y7q7m:
     resolution: {integrity: sha512-BIroqvXEqt826aE9r3K5cox1zobuPuAzdYJ36kouC2TVhlXvFKIILgFVWrpp9HZPwB3aLzasmG3K87q7TSyXZg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vueuse/core/-/core-9.1.0.tgz}
     id: registry.npmmirror.com/@vueuse/core/9.1.0
     name: '@vueuse/core'
@@ -617,8 +640,8 @@ packages:
     dependencies:
       '@types/web-bluetooth': registry.npmmirror.com/@types/web-bluetooth/0.0.15
       '@vueuse/metadata': registry.npmmirror.com/@vueuse/metadata/9.1.0
-      '@vueuse/shared': registry.npmmirror.com/@vueuse/shared/9.1.0_vue@2.7.8
-      vue-demi: registry.npmmirror.com/vue-demi/0.13.7_vue@2.7.8
+      '@vueuse/shared': registry.npmmirror.com/@vueuse/shared/9.1.0_iuxdnhjofcm4hv6qrvss4y7q7m
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.8_iuxdnhjofcm4hv6qrvss4y7q7m
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -628,13 +651,13 @@ packages:
     name: '@vueuse/metadata'
     version: 9.1.0
 
-  registry.npmmirror.com/@vueuse/shared/9.1.0_vue@2.7.8:
+  registry.npmmirror.com/@vueuse/shared/9.1.0_iuxdnhjofcm4hv6qrvss4y7q7m:
     resolution: {integrity: sha512-pB/3njQu4tfJJ78ajELNda0yMG6lKfpToQW7Soe09CprF1k3QuyoNi1tBNvo75wBDJWD+LOnr+c4B5HZ39jY/Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vueuse/shared/-/shared-9.1.0.tgz}
     id: registry.npmmirror.com/@vueuse/shared/9.1.0
     name: '@vueuse/shared'
     version: 9.1.0
     dependencies:
-      vue-demi: registry.npmmirror.com/vue-demi/0.13.8_vue@2.7.8
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.8_iuxdnhjofcm4hv6qrvss4y7q7m
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -879,6 +902,14 @@ packages:
       picomatch: registry.npmmirror.com/picomatch/2.3.1
     dev: true
 
+  registry.npmmirror.com/async-validator/1.8.5:
+    resolution: {integrity: sha512-tXBM+1m056MAX0E8TL2iCjg8WvSyXu0Zc8LNtYqrVeyoL3+esHRZ4SieE9fKQyyU09uONjnMEjrNBMqT0mbvmA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/async-validator/-/async-validator-1.8.5.tgz}
+    name: async-validator
+    version: 1.8.5
+    dependencies:
+      babel-runtime: registry.npmmirror.com/babel-runtime/6.26.0
+    dev: false
+
   registry.npmmirror.com/asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/asynckit/-/asynckit-0.4.0.tgz}
     name: asynckit
@@ -893,6 +924,21 @@ packages:
       form-data: registry.npmmirror.com/form-data/4.0.0
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  registry.npmmirror.com/babel-helper-vue-jsx-merge-props/2.0.3:
+    resolution: {integrity: sha512-gsLiKK7Qrb7zYJNgiXKpXblxbV5ffSwR0f5whkPAaBAR4fhi6bwRZxX9wBlIc5M/v8CCkXUbXZL4N/nSE97cqg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz}
+    name: babel-helper-vue-jsx-merge-props
+    version: 2.0.3
+    dev: false
+
+  registry.npmmirror.com/babel-runtime/6.26.0:
+    resolution: {integrity: sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/babel-runtime/-/babel-runtime-6.26.0.tgz}
+    name: babel-runtime
+    version: 6.26.0
+    dependencies:
+      core-js: registry.npmmirror.com/core-js/2.6.12
+      regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.11.1
     dev: false
 
   registry.npmmirror.com/balanced-match/1.0.2:
@@ -966,6 +1012,13 @@ packages:
       get-intrinsic: registry.npmmirror.com/get-intrinsic/1.1.2
     dev: false
 
+  registry.npmmirror.com/camelcase/7.0.0:
+    resolution: {integrity: sha512-JToIvOmz6nhGsUhAYScbo2d6Py5wojjNfoxoc2mEVLUdJ70gJK2gnd+ABY1Tc3sVMyK7QDPtN0T/XdlCQWITyQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/camelcase/-/camelcase-7.0.0.tgz}
+    name: camelcase
+    version: 7.0.0
+    engines: {node: '>=14.16'}
+    dev: false
+
   registry.npmmirror.com/caniuse-lite/1.0.30001377:
     resolution: {integrity: sha512-I5XeHI1x/mRSGl96LFOaSk528LA/yZG3m3iQgImGujjO8gotd/DL8QaI1R1h1dg5ATeI2jqPblMpKq4Tr5iKfQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001377.tgz}
     name: caniuse-lite
@@ -1031,6 +1084,14 @@ packages:
     name: consola
     version: 2.15.3
     dev: true
+
+  registry.npmmirror.com/core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js/-/core-js-2.6.12.tgz}
+    name: core-js
+    version: 2.6.12
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
 
   registry.npmmirror.com/core-js/3.24.1:
     resolution: {integrity: sha512-0QTBSYSUZ6Gq21utGzkfITDylE8jWC9Ne1D2MrhvlsZBI1x39OdDIVbzSqtgMndIy6BlHxBXpMGqzZmnztg2rg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js/-/core-js-3.24.1.tgz}
@@ -1141,6 +1202,13 @@ packages:
     version: 0.1.4
     dev: true
 
+  registry.npmmirror.com/deepmerge/1.5.2:
+    resolution: {integrity: sha512-95k0GDqvBjZavkuvzx/YqVLv/6YYa17fz6ILMSf7neqQITCPbnfEnQvEgMPNjH4kgobe7+WIL0yJEHku+H3qtQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/deepmerge/-/deepmerge-1.5.2.tgz}
+    name: deepmerge
+    version: 1.5.2
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   registry.npmmirror.com/defu/6.0.0:
     resolution: {integrity: sha512-t2MZGLf1V2rV4VBZbWIaXKdX/mUcYW0n2znQZoADBkGGxYL8EWqCuCZBmJPJ/Yy9fofJkyuuSuo5GSwo0XdEgw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/defu/-/defu-6.0.0.tgz}
     name: defu
@@ -1194,6 +1262,23 @@ packages:
     name: electron-to-chromium
     version: 1.4.222
     dev: true
+
+  registry.npmmirror.com/element-ui/2.15.9_vue@2.7.8:
+    resolution: {integrity: sha512-dx45nQLt4Hn87/Z9eRr3ex6KFZbxlFAwEU3QoW3wA5EsYftvHTyL9Pq7VnXXD7hu1Eiaup2jcs6kp+/VSFmXuA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/element-ui/-/element-ui-2.15.9.tgz}
+    id: registry.npmmirror.com/element-ui/2.15.9
+    name: element-ui
+    version: 2.15.9
+    peerDependencies:
+      vue: ^2.5.17
+    dependencies:
+      async-validator: registry.npmmirror.com/async-validator/1.8.5
+      babel-helper-vue-jsx-merge-props: registry.npmmirror.com/babel-helper-vue-jsx-merge-props/2.0.3
+      deepmerge: registry.npmmirror.com/deepmerge/1.5.2
+      normalize-wheel: registry.npmmirror.com/normalize-wheel/1.0.1
+      resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
+      throttle-debounce: registry.npmmirror.com/throttle-debounce/1.1.0
+      vue: registry.npmmirror.com/vue/2.7.8
+    dev: false
 
   registry.npmmirror.com/enhanced-resolve/5.10.0:
     resolution: {integrity: sha512-T0yTFjdpldGY8PmuXXR0PyQ1ufZpEGiHVrp7zHKB7jdR4qlmZHhONVM5AQOAWXuF/w3dnHbEQVrNptJgt7F+cQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.10.0.tgz}
@@ -2007,6 +2092,12 @@ packages:
     version: 4.17.21
     dev: false
 
+  registry.npmmirror.com/lodash.debounce/4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz}
+    name: lodash.debounce
+    version: 4.0.8
+    dev: false
+
   registry.npmmirror.com/lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz}
     name: lodash
@@ -2142,6 +2233,12 @@ packages:
     version: 3.0.0
     engines: {node: '>=0.10.0'}
     dev: true
+
+  registry.npmmirror.com/normalize-wheel/1.0.1:
+    resolution: {integrity: sha512-1OnlAPZ3zgrk8B91HyRj+eVv+kS5u+Z0SCsak6Xil/kmgEia50ga7zfkumayonZrImffAxPU/5WcyGhzetHNPA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/normalize-wheel/-/normalize-wheel-1.0.1.tgz}
+    name: normalize-wheel
+    version: 1.0.1
+    dev: false
 
   registry.npmmirror.com/npm-run-path/4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/npm-run-path/-/npm-run-path-4.0.1.tgz}
@@ -2346,11 +2443,23 @@ packages:
       picomatch: registry.npmmirror.com/picomatch/2.3.1
     dev: true
 
+  registry.npmmirror.com/regenerator-runtime/0.11.1:
+    resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz}
+    name: regenerator-runtime
+    version: 0.11.1
+    dev: false
+
   registry.npmmirror.com/regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz}
     name: regenerator-runtime
     version: 0.13.9
     dev: true
+
+  registry.npmmirror.com/resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz}
+    name: resize-observer-polyfill
+    version: 1.5.1
+    dev: false
 
   registry.npmmirror.com/resolve/1.22.1:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/resolve/-/resolve-1.22.1.tgz}
@@ -2523,6 +2632,12 @@ packages:
       totalist: registry.npmmirror.com/totalist/3.0.0
     dev: true
 
+  registry.npmmirror.com/sortablejs/1.10.2:
+    resolution: {integrity: sha512-YkPGufevysvfwn5rfdlGyrGjt7/CRHwvRPogD/lC+TnvcN29jDpCifKP+rBqf+LRldfXSTh+0CGLcSg0VIxq3A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sortablejs/-/sortablejs-1.10.2.tgz}
+    name: sortablejs
+    version: 1.10.2
+    dev: false
+
   registry.npmmirror.com/source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map-js/-/source-map-js-1.0.2.tgz}
     name: source-map-js
@@ -2639,6 +2754,13 @@ packages:
       commander: registry.npmmirror.com/commander/2.20.3
       source-map-support: registry.npmmirror.com/source-map-support/0.5.21
     dev: true
+
+  registry.npmmirror.com/throttle-debounce/1.1.0:
+    resolution: {integrity: sha512-XH8UiPCQcWNuk2LYePibW/4qL97+ZQ1AN3FNXwZRBNPPowo/NRU5fAlDCSNBJIYCKbioZfuYtMhG4quqoJhVzg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/throttle-debounce/-/throttle-debounce-1.1.0.tgz}
+    name: throttle-debounce
+    version: 1.1.0
+    engines: {node: '>=4'}
+    dev: false
 
   registry.npmmirror.com/tiny-emitter/2.1.0:
     resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz}
@@ -2803,7 +2925,7 @@ packages:
     dependencies:
       '@antfu/utils': registry.npmmirror.com/@antfu/utils/0.5.2
       '@rollup/pluginutils': registry.npmmirror.com/@rollup/pluginutils/4.2.1
-      '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.1.0_vue@2.7.8
+      '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.1.0_iuxdnhjofcm4hv6qrvss4y7q7m
       local-pkg: registry.npmmirror.com/local-pkg/0.4.2
       magic-string: registry.npmmirror.com/magic-string/0.26.2
       unimport: registry.npmmirror.com/unimport/0.6.7_vite@3.0.7+webpack@5.74.0
@@ -2936,24 +3058,7 @@ packages:
       fsevents: registry.npmmirror.com/fsevents/2.3.2
     dev: true
 
-  registry.npmmirror.com/vue-demi/0.13.7_vue@2.7.8:
-    resolution: {integrity: sha512-hbhlvpx1gFW3TB5HxJ0mNxyA9Jh5iQt409taOs6zkhpvfJ7YzLs1rsLufJmDsjH5PI1cOyfikY1fE/meyHfU5A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.7.tgz}
-    id: registry.npmmirror.com/vue-demi/0.13.7
-    name: vue-demi
-    version: 0.13.7
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dependencies:
-      vue: registry.npmmirror.com/vue/2.7.8
-
-  registry.npmmirror.com/vue-demi/0.13.8_vue@2.7.8:
+  registry.npmmirror.com/vue-demi/0.13.8_iuxdnhjofcm4hv6qrvss4y7q7m:
     resolution: {integrity: sha512-Vy1zbZhCOdsmvGR6tJhAvO5vhP7eiS8xkbYQSoVa7o6KlIy3W8Rc53ED4qI4qpeRDjv3mLfXSEpYU6Yq4pgXRg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.8.tgz}
     id: registry.npmmirror.com/vue-demi/0.13.8
     name: vue-demi
@@ -2968,6 +3073,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      '@vue/composition-api': registry.npmmirror.com/@vue/composition-api/1.7.0_vue@2.7.8
       vue: registry.npmmirror.com/vue/2.7.8
 
   registry.npmmirror.com/vue-json-viewer/2.2.22_vue@2.7.8:
@@ -2982,6 +3088,15 @@ packages:
       vue: registry.npmmirror.com/vue/2.7.8
     dev: false
 
+  registry.npmmirror.com/vue-monaco-editor/0.0.19:
+    resolution: {integrity: sha512-6tgCWkC1WDPp8K1xgZ9Fp7U4ww0DIQPZC/x9Ih8hEuKPfpekzcHo2r9DaWa1lvzFMeJPv5e4mFCYhmR9+SAl8A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-monaco-editor/-/vue-monaco-editor-0.0.19.tgz}
+    name: vue-monaco-editor
+    version: 0.0.19
+    dependencies:
+      lodash.debounce: registry.npmmirror.com/lodash.debounce/4.0.8
+      vue: registry.npmmirror.com/vue/2.7.8
+    dev: false
+
   registry.npmmirror.com/vue/2.7.8:
     resolution: {integrity: sha512-ncwlZx5qOcn754bCu5/tS/IWPhXHopfit79cx+uIlLMyt3vCMGcXai5yCG5y+I6cDmEj4ukRYyZail9FTQh7lQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue/-/vue-2.7.8.tgz}
     name: vue
@@ -2989,6 +3104,14 @@ packages:
     dependencies:
       '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/2.7.8
       csstype: registry.npmmirror.com/csstype/3.1.0
+
+  registry.npmmirror.com/vuedraggable/2.24.3:
+    resolution: {integrity: sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuedraggable/-/vuedraggable-2.24.3.tgz}
+    name: vuedraggable
+    version: 2.24.3
+    dependencies:
+      sortablejs: registry.npmmirror.com/sortablejs/1.10.2
+    dev: false
 
   registry.npmmirror.com/w3c-hr-time/1.0.2:
     resolution: {integrity: sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz}

@@ -3,7 +3,7 @@ import Config from "~/views/config.vue";
 </script>
 
 <template>
-  <Config></Config>
+  <Config h="screen" w="screen" overflow="hidden"></Config>
 </template>
 
 <style scoped></style>

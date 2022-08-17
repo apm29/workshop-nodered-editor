@@ -30,3 +30,12 @@ body {
   width: 100%;
   height: 2px;
 }
+
+i {
+  display: inline-block;
+}
+
+button {
+  line-height: initial;
+}
+

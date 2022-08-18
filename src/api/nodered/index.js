@@ -48,6 +48,7 @@ export function postNodeRedJsonByFlowId(flowId, nodes, configs) {
           z: flowId,
         })),
       }),
-    }
+    },
+    showSuccessMessage: true
   })
 }

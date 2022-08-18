@@ -129,7 +129,7 @@ export function useCreateStencil(getGraphFn, getStencilContainerFn) {
           name: "延迟",
           pauseType: "delay",
           timeout: "5",
-          timeoutUnits: "seconds",
+          timeoutUnits: "milliseconds",
           rate: "1",
           nbRateUnits: "1",
           rateUnits: "second",

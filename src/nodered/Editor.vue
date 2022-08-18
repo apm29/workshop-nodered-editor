@@ -99,8 +99,10 @@ import { useCreateGraph } from "./core/graph.js";
 import { useCreateStencil } from "./core/component.js";
 import { useGraphControl } from "./core/control.js";
 import { useSizeWatcher } from "./core/size.js";
+import { getNodeRedWiresFromX6Edges } from "./vue-node";
 import JsonViewer from "vue-json-viewer";
 import "./node/register.js";
+import { watchPausable } from "@vueuse/core";
 const props = defineProps({
   data: {
     type: Object,
@@ -127,7 +129,7 @@ const { graphInstance } = useCreateGraph(
   renderData
 );
 //监听数据修改
-watch(nodes, renderData);
+const { pause, resume } = watchPausable(nodes, renderData);
 
 const { stencilInstance } = useCreateStencil(
   () => graphInstance.value,
@@ -138,7 +140,7 @@ useEditorEvent(
   handleNodeEdit,
   handleNodeSelect,
   handleNodeUnselect,
-  handleGraphDataChange,
+  handleCellChange,
   handleEdgeSelect,
   handleEdgeUnselect
 );
@@ -149,7 +151,7 @@ const { zoomIn, zoomOut, zoomReset } = useGraphControl(() => graphInstance.value
 function renderData() {
   const graph = graphInstance.value;
   if (graph && nodes.value) {
-    console.log("render data");
+    console.log("render data", nodes.value);
     graph.fromJSON(nodes.value);
   }
 }
@@ -159,8 +161,6 @@ const [showMinimap, toggleMinimap] = useToggle(true);
 
 //节点选择/编辑
 const viewNodeData = ref();
-const editNodeData = ref();
-const editNode = ref();
 function handleNodeSelect({ data, node }) {
   viewNodeData.value = data;
 }
@@ -181,9 +181,18 @@ function handleEdgeUnselect({ edge }) {
 }
 
 function handleNodeEdit({ data, node }) {
+  //新增的节点无id,手动设置下xy,id
+  if (!data.id) {
+    data.id = node.id;
+  }
+  data.x = parseFloat(node.position().x);
+  data.y = parseFloat(node.position().y);
+  const edges = node.model.getOutgoingEdges(node.id) || [];
+  const wires = getNodeRedWiresFromX6Edges(edges);
+  data.wires = wires;
   //先手动保存下节点
-  //handleGraphDataChange();
-  emits("node:edit", data, node);
+  handleGraphDataChange();
+  nextTick(() => emits("node:edit", data, node));
 }
 //节点在上层保存后同步下数据
 function handleNodeSaved(data) {
@@ -193,7 +202,13 @@ function handleNodeSaved(data) {
 const registerNodeSavedListener = inject("registerNodeSavedListener");
 registerNodeSavedListener(handleNodeSaved);
 //监听节点/边的变更
-async function handleGraphDataChange() {
+function handleCellChange() {
+  pause();
+  handleGraphDataChange();
+  nextTick(resume);
+}
+
+function handleGraphDataChange() {
   const graph = graphInstance.value;
   const json = graph.toJSON();
   emits("update:data", json.cells);

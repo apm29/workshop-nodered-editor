@@ -35,6 +35,7 @@
         size="mini"
         :model="editNodeData"
       >
+        x:{{ editNodeData.x }} y:{{ editNodeData.y }}
         <el-form-item label="状态">
           <el-switch
             v-model="editNodeData.d"
@@ -105,7 +106,6 @@ const {
   configs,
   nodes,
   tabs,
-  flow,
   //x6格式的
   x6nodes,
   pushNodesToServer,
@@ -161,12 +161,16 @@ function handleDeploy() {
 const [showEditor, toggleNodeEditor] = useToggle();
 const editNodeData = ref();
 const editNode = ref();
+watch(editNodeData, (data) => {
+  editNode.value?.setData(data);
+});
 function handleEditNode(data, node) {
   editNodeData.value = cloneDeep(data);
   editNode.value = node;
   toggleNodeEditor();
 }
 function handleSaveNode() {
+  console.log(nodes.value, editNodeData.value);
   //找到编辑节点修改
   const index = nodes.value.findIndex((it) => it.id === editNodeData.value.id);
   const copy = cloneDeep(nodes.value);

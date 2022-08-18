@@ -13,22 +13,25 @@ export function convertVueNodeToNodeRedJson(cells) {
     }));
   const wires = cells.filter((it) => ["dag-edge", "edge"].includes(it.shape));
   nodes.forEach((node) => {
-    const wiresArr = wires
-      .filter((wire) => wire.source.cell === node.id)
-      .reduce((arr, item) => {
-        const index =
-          parseInt(
-            item.source.port.substring(item.source.port.lastIndexOf("-") + 1)
-          ) - 1;
-        if (!arr[index]) {
-          arr[index] = [];
-        }
-        arr[index].push(item.target.cell);
-        return arr;
-      }, []);
+    const wiresArr = getNodeRedWiresFromX6Edges(wires
+      .filter((wire) => wire.source.cell === node.id))
     node.wires = wiresArr.filter((it) => it && it.every((c) => c));
   });
   return nodes;
+}
+
+export function getNodeRedWiresFromX6Edges(edges) {
+  return edges.reduce((arr, item) => {
+    const index =
+      parseInt(
+        item.source.port.substring(item.source.port.lastIndexOf("-") + 1)
+      ) - 1;
+    if (!arr[index]) {
+      arr[index] = [];
+    }
+    arr[index].push(item.target.cell);
+    return arr;
+  }, [])
 }
 
 export function convertNodeRedJsonToVueNode(noderedJson) {

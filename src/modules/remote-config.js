@@ -33,7 +33,7 @@ export const install = () => {
             reject(axiosResponse.data.msg);
           }
         } else {
-          // alert(axiosResponse.data.msg || axiosResponse.statusText);
+          Message.error(axiosResponse.data.msg || axiosResponse.statusText);
           reject(axiosResponse);
         }
       });

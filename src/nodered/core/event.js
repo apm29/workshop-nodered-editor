@@ -6,7 +6,9 @@ export function useEditorEvent(
   handleNodeEdit,
   handleNodeSelect,
   handleNodeUnselect,
-  handleGraphDataChange
+  handleGraphDataChange,
+  handleEdgeSelect,
+  handleEdgeUnselect
 ) {
   function mountEventListener(graph) {
     if (graph) {
@@ -88,6 +90,12 @@ export function useEditorEvent(
       graph.on("node:unselected", ({ node }) => {
         // console.log("node:unselected", node);
         handleNodeUnselect?.({ data: node.data, node });
+      });
+      graph.on("edge:selected", ({ edge }) => {
+        handleEdgeSelect?.({ edge });
+      });
+      graph.on("edge:unselected", ({ edge }) => {
+        handleEdgeUnselect?.({ edge });
       });
       const throttledHandler = useThrottleFn(handleGraphDataChange, 2000, true);
       const takeLastFn = useTakeLastFn(handleGraphDataChange);

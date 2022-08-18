@@ -53,7 +53,8 @@ export function convertNodeRedJsonToVueNode(noderedJson) {
             shape: "dag-edge",
             target: {
               cell: `${target}`,
-              port: `${target}-port-in-${index + 1}`,
+              //这里默认所有节点的in只有一个
+              port: `${target}-port-in-1`,
             },
             source: {
               cell: `${node.id}`,

@@ -138,7 +138,9 @@ useEditorEvent(
   handleNodeEdit,
   handleNodeSelect,
   handleNodeUnselect,
-  handleGraphDataChange
+  handleGraphDataChange,
+  handleEdgeSelect,
+  handleEdgeUnselect
 );
 useSizeWatcher(() => graphInstance.value, container);
 
@@ -162,9 +164,22 @@ const editNode = ref();
 function handleNodeSelect({ data, node }) {
   viewNodeData.value = data;
 }
+
 function handleNodeUnselect({ data, node }) {
   viewNodeData.value = null;
 }
+
+function handleEdgeSelect({ edge }) {
+  viewNodeData.value = {
+    source: edge.source,
+    target: edge.target,
+  };
+}
+
+function handleEdgeUnselect({ edge }) {
+  viewNodeData.value = null;
+}
+
 function handleNodeEdit({ data, node }) {
   //先手动保存下节点
   //handleGraphDataChange();

@@ -26,7 +26,6 @@
       保存
     </el-button>
     <el-button
-      type="danger"
       plain
       block="~"
       w="full"

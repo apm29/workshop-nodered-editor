@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="table-row-group">
-      <div class="table-row" v-for="(lib, index) of libs">
+      <div class="table-row" v-for="(lib, index) of libs" :key="index">
         <div class="table-cell" border="~  emerald-500">
           <el-input
             border="!none"

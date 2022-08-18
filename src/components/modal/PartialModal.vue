@@ -58,13 +58,13 @@ defineProps({
 }
 .slide-fade-enter-from, .slide-fade-leave-to
   /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateY(100%);
+  transform: translateX(100%);
   opacity: 0;
 }
 
 .slide-fade-enter-to, .slide-fade-leave-from
   /* .slide-fade-leave-active for below version 2.1.8 */ {
-  transform: translateY(0%);
+  transform: translateX(0%);
   opacity: 1;
 }
 

@@ -1,26 +1,22 @@
 <template>
   <div h="screen" overflow="hidden">
-    <Editor h="screen" overflow="hidden" :data.sync="x6nodes" @node:edit="handleEditNode">
+    <Editor
+      h="screen"
+      overflow="hidden"
+      :data.sync="x6nodes"
+      @node:edit="handleEditNode"
+      @deploy="handleDeploy"
+    >
       <template #edit="{ data }">
         <!-- <el-empty v-if="!data" description="点击选择节点">
           <template #image>
             <i class=" i-mdi-cursor-default-click" text="3xl gray-500"></i>
           </template>
         </el-empty> -->
-        <el-button
-          block="~"
-          w="full"
-          type="primary"
-          rounded="!none"
-          m="!l-0"
-          @click="handleDeploy"
-        >
-          部署到云端
-        </el-button>
       </template>
       <template #toolbar>
         <button class="toolbar-btn-icon">
-          <i class="i-mdi-code-json text-gray-500"></i>
+          <i class="i-mdi-code-json text-gray-500" @click="toggleJsonImporter()"></i>
         </button>
       </template>
     </Editor>
@@ -41,7 +37,7 @@
       >
         <el-form-item label="状态">
           <el-switch
-            v-model="editNodeData.disabled"
+            v-model="editNodeData.d"
             active-text="禁用"
             inactive-text="启用"
           ></el-switch>
@@ -81,22 +77,28 @@
         :config="editConfig.config"
       />
     </PartialModal>
+    <el-dialog title="导入JSON" :visible.sync="showJsonImporter">
+      <JsonImporter @import-json="handleJsonImported" />
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
 import "./edit/index.js";
 import "./config/index.js";
-import { NodeTypes, ConfigTypes, TabTypes } from "./preset";
 import Editor from "./Editor.vue";
 import { getComponentNameByType } from "./biz/components";
 import { remote } from "~/composables";
 import cloneDeep from "lodash/cloneDeep";
 import PartialModal from "~/components/modal/PartialModal.vue";
-import { computed, reactive, unref, ref, provide } from "vue";
 import { useToggle } from "@vueuse/core";
 import { useNodes } from "./biz/nodes.js";
 import { createConfigByType, getConfigNameByType } from "./biz/configs.js";
+import JsonImporter from "./data/JsonImporter.vue";
+
+const props = defineProps({
+  flowId: String,
+});
 
 const {
   //node-red格式的
@@ -106,7 +108,8 @@ const {
   flow,
   //x6格式的
   x6nodes,
-} = useNodes();
+  pushNodesToServer,
+} = useNodes(() => props.flowId);
 provide("nodes", nodes);
 provide("getNodes", () => unref(nodes));
 provide("configs", configs);
@@ -151,51 +154,7 @@ function handleSaveConfig(config) {
 }
 
 function handleDeploy() {
-  const nodesData = nodes.value;
-  const configsData = configs.value;
-  const minX =
-    nodesData
-      .map((it) => it.x)
-      .reduce((minX, x) => {
-        return Math.min(minX, x || 99999);
-      }, 0) - 150;
-  const minY =
-    nodesData
-      .map((it) => it.y)
-      .reduce((minY, y) => {
-        return Math.min(minY, y || 99999);
-      }, 0) - 30;
-  console.log(minX, minY);
-  const flowId = "f6f2187d.f17ca8";
-  remote.postForm({
-    url: "/java/nodeRed/webToMysql",
-    data: {
-      param: JSON.stringify({
-        id: flowId,
-        type: "tab",
-        label: "回火窑温度测试",
-        disabled: false,
-        info: "",
-        env: [],
-        nodes: [
-          ...(nodesData || []).map((it) => ({
-            z: flowId,
-            ...it,
-            x: it.x - minX,
-            y: it.y - minY,
-          })),
-          ...(configsData || []).map((it) => ({
-            z: flowId,
-            ...it,
-          })),
-        ],
-        configs: (configsData || []).map((it) => ({
-          z: flowId,
-          ...it,
-        })),
-      }),
-    },
-  });
+  pushNodesToServer();
 }
 
 //编辑
@@ -226,6 +185,17 @@ function registerNodeSavedListener(lisenter) {
   if (lisenter && lisenter instanceof Function) {
     nodeSavedListeners.value.push(lisenter);
   }
+}
+
+//json导入弹窗
+const [showJsonImporter, toggleJsonImporter] = useToggle();
+//导入json处理
+function handleJsonImported({ nodes: jsonNodes, configs: jsonConfigs, tabs: jsonTabs }) {
+  console.log(arguments);
+  nodes.value = jsonNodes;
+  configs.value = jsonConfigs;
+  tabs.value = jsonTabs;
+  toggleJsonImporter(false);
 }
 </script>
 <style scoped></style>

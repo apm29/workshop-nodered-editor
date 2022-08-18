@@ -5,10 +5,10 @@
 </template>
 
 <script setup>
-import BaseNode from "./BaseNode.vue";
+import BaseNode from "./base/BaseNode.vue";
 import { inject, computed, unref, watch } from "vue";
-import { useConnectedEdgeStyle } from "./style.js";
-import { usePorts } from "./ports.js";
+import { useConnectedEdgeStyle } from "./base/style.js";
+import { usePorts } from "./base/ports.js";
 //inject: ["getGraph", "getNode"],
 const getGraph = inject("getGraph");
 const getNode = inject("getNode");
@@ -16,13 +16,18 @@ const getNode = inject("getNode");
 const node = computed(getNode);
 const graph = computed(getGraph);
 const data = computed(() => unref(node)?.data);
-const label = computed(() => unref(data)?.name);
-const disabled = computed(() => unref(data)?.disabled ?? false);
+const label = computed(() => unref(data)?.name || "完成");
+const disabled = computed(() => unref(data)?.d ?? false);
 
 //添加port
 usePorts(node, 1, "out");
 
 useConnectedEdgeStyle(getGraph, getNode, disabled);
 </script>
-
+<script>
+export default {
+  name: "Complete",
+  type: "complete",
+};
+</script>
 <style lang="scss" scoped></style>

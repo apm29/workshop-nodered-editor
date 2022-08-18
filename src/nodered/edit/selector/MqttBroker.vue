@@ -1,15 +1,20 @@
 <template>
   <div flex="~" items="center" gap="x-3">
     <el-select :value="value" placeholder="选择服务端" @input="$emit('input', $event)">
-      <el-option v-for="config of brokers" :value="config.id" :label="config.name">
+      <el-option
+        v-for="config of brokers"
+        :key="config.id"
+        :value="config.id"
+        :label="config.name"
+      >
       </el-option>
     </el-select>
-    <button @click="editConfig(ConfigType, value)" v-if="value">
-      <i class=" i-mdi-circle-edit-outline" text="2xl gray-500"></i>
-    </button>
-    <button @click="editConfig(ConfigType, null)">
-      <i class=" i-mdi-plus-circle-outline" text="2xl gray-500"></i>
-    </button>
+    <div class="icon-btn" @click="editConfig(ConfigType, value)" v-if="value">
+      <i class="i-mdi-circle-edit-outline" text="2xl gray-500"></i>
+    </div>
+    <div class="icon-btn" @click="editConfig(ConfigType, null)">
+      <i class="i-mdi-plus-circle-outline" text="2xl gray-500"></i>
+    </div>
   </div>
 </template>
 

@@ -52,7 +52,7 @@
         <!-- 节点编辑部分,交给上层组件 -->
         <slot :data="viewNodeData">
           <json-viewer
-            :value="viewNodeData || nodes"
+            :value="viewNodeData || {}"
             :expand-depth="5"
             expanded
             copyable
@@ -67,8 +67,25 @@
         </slot>
       </div>
 
-      <el-button block="~" w="full" m="!l-0" rounded="!none" @click="handleDeploy">
+      <el-button
+        block="~"
+        w="full"
+        m="!l-0"
+        rounded="!none"
+        @click="handleSaveLocal"
+        plain
+      >
         保存到本地
+      </el-button>
+      <el-button
+        block="~"
+        w="full"
+        type="primary"
+        rounded="!none"
+        m="!l-0"
+        @click="handleDeploy"
+      >
+        部署到云端
       </el-button>
       <slot :data="viewNodeData" name="edit"> </slot>
     </div>
@@ -94,7 +111,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["node:edit", "update:data"]);
+const emits = defineEmits(["node:edit", "update:data", "deploy"]);
 
 const { data: nodes } = toRefs(props);
 
@@ -150,7 +167,7 @@ function handleNodeUnselect({ data, node }) {
 }
 function handleNodeEdit({ data, node }) {
   //先手动保存下节点
-  handleGraphDataChange();
+  //handleGraphDataChange();
   emits("node:edit", data, node);
 }
 //节点在上层保存后同步下数据
@@ -164,13 +181,17 @@ registerNodeSavedListener(handleNodeSaved);
 async function handleGraphDataChange() {
   const graph = graphInstance.value;
   const json = graph.toJSON();
-  console.log(json);
   emits("update:data", json.cells);
 }
 
 //保存
+function handleSaveLocal() {
+  handleGraphDataChange();
+}
+//部署
 function handleDeploy() {
   handleGraphDataChange();
+  nextTick(() => emits("deploy"));
 }
 </script>
 

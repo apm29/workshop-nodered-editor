@@ -90,16 +90,28 @@
     <el-button type="primary" block="~" w="full" @click="saveConfig(config)">
       保存
     </el-button>
+    <el-button
+      plain
+      block="~"
+      w="full"
+      m="!l-0 t-3"
+      @click="cancelSaveConfig(config)"
+    >
+      取消
+    </el-button>
   </el-form>
 </template>
 
 <script setup>
 import LifecycleMessage from "./mqtt-broker/LifecycleMessage.vue";
-import { inject, computed, ref, toRefs } from "vue";
 const props = defineProps({
   config: Object,
 });
+if (!props.config.credentials) {
+  props.config.credentials = {};
+}
 const saveConfig = inject("saveConfig");
+const cancelSaveConfig = inject("cancelSaveConfig");
 </script>
 
 <style lang="scss" scoped></style>

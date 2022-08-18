@@ -7,6 +7,7 @@ import { ElementUiResolver } from 'unplugin-vue-components/resolvers'
 import legacy from '@vitejs/plugin-legacy'
 import Unocss from 'unocss/vite'
 import { splitVendorChunkPlugin } from 'vite'
+import requireContext from "rollup-plugin-require-context"; // 处理兼容webpack工具require-context;
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/nodered/",
@@ -34,6 +35,7 @@ export default defineConfig({
     ]
   },
   plugins: [
+    requireContext(),
     vitePluginVue(),
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
@@ -48,9 +50,9 @@ export default defineConfig({
       ],
       vueTemplate: true,
     }),
-    Components({
-      resolvers: [ElementUiResolver()]
-    }),
+    // Components({
+    //   resolvers: [ElementUiResolver()]
+    // }),
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),

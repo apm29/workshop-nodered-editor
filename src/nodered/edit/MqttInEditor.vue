@@ -25,6 +25,7 @@
           :value="type.value"
           :label="type.label"
           v-for="type of MqttOutputTypes"
+          :key="type.value"
         ></el-option>
       </el-select>
     </el-form-item>

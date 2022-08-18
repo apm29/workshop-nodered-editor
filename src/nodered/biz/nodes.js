@@ -4,10 +4,22 @@ import {
   convertNodeRedJsonToVueNode,
   convertVueNodeToNodeRedJson,
 } from "../vue-node";
+import { NodeTypes, ConfigTypes, TabTypes } from "../preset";
+import { postNodeRedJsonByFlowId, getNodeRedJsonByFlowId } from "~/api/nodered"
 const LocalNodes = useLocalStorage("local-nodes", []);
 const LocalConfigs = useLocalStorage("local-configs", []);
 const LocalTabs = useLocalStorage("local-tabs", []);
-export function useNodes() {
+
+function convertAsGetter(getFn) {
+  if (getFn instanceof Function) {
+    return getFn;
+  } else {
+    return () => unref(getFn);
+  }
+}
+
+export function useNodes(getFlowIdFn) {
+  const flowId = computed(convertAsGetter(getFlowIdFn))
   const configs = ref(LocalConfigs);
   const nodes = ref(LocalNodes);
   const tabs = ref(LocalTabs);
@@ -20,6 +32,21 @@ export function useNodes() {
     //从cells[],转为node-red形式的json
     set: (cells) => (nodes.value = convertVueNodeToNodeRedJson(cells)),
   });
+
+  function pullNodesFromServer() {
+    getNodeRedJsonByFlowId(flowId.value).then(res => {
+      const flows = res?.data?.nodes || []
+      nodes.value = flows.filter(f => NodeTypes.includes(f.type))
+      configs.value = flows.filter(f => ConfigTypes.includes(f.type))
+      tabs.value = [res?.data ?? {}]
+    })
+  }
+  watch(flowId, pullNodesFromServer, { immediate: true })
+
+  function pushNodesToServer() {
+    return postNodeRedJsonByFlowId(unref(flowId), unref(nodes), unref(configs))
+  }
+
   return {
     //node-red格式的
     configs,
@@ -28,5 +55,7 @@ export function useNodes() {
     flow,
     //x6格式的
     x6nodes,
+    //push
+    pushNodesToServer
   };
 }

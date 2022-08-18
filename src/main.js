@@ -4,7 +4,8 @@ import '@unocss/reset/tailwind.css'
 import '~/style.css'
 import 'uno.css'
 import 'element-ui/lib/theme-chalk/index.css';
-
+import ElementUI from "element-ui";
+Vue.use(ElementUI)
 const app = new Vue({
   render: (h) => h(App),
 })

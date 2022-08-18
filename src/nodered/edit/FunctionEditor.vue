@@ -6,15 +6,15 @@
     <el-form-item label="库">
       <LibraryImporter :libs="data.libs"></LibraryImporter>
     </el-form-item>
-    <el-tabs>
+    <el-tabs m="b-3">
       <el-tab-pane label="函数" lazy>
-        <textarea v-model="data.func"></textarea>
+        <el-input type="textarea" :rows="8" v-model="data.func"></el-input>
       </el-tab-pane>
       <el-tab-pane label="初始化" lazy>
-        <textarea v-model="data.initialize"></textarea>
+        <el-input type="textarea" :rows="8" v-model="data.initialize"></el-input>
       </el-tab-pane>
       <el-tab-pane label="结束" lazy>
-        <textarea v-model="data.finalize"></textarea>
+        <el-input type="textarea" :rows="8" v-model="data.finalize"></el-input>
       </el-tab-pane>
     </el-tabs>
   </div>

@@ -10,16 +10,12 @@
       <el-input v-model="config.class" placeholder="组件类名"></el-input>
     </el-form-item>
     <el-form-item label="宽度">
-      <el-input-number
-        v-model="config.width"
-        placeholder="组件宽度"
-      ></el-input-number>
+      <el-input-number v-model="config.width" placeholder="组件宽度"></el-input-number>
     </el-form-item>
     <el-button type="primary" block="~" w="full" @click="saveConfig(config)">
       保存
     </el-button>
     <el-button
-      type="danger"
       plain
       block="~"
       w="full"
@@ -32,7 +28,6 @@
 </template>
 
 <script setup>
-import { inject, computed, ref, toRefs } from "vue";
 import UiTab from "../edit/selector/UiTab";
 const props = defineProps({
   config: Object,

@@ -9,8 +9,8 @@
       handle=".handle"
       group="draggable-list"
     >
-      <div v-for="(prop, index) of props" flex="~" items="center" gap="x-2">
-        <i class=" i-mdi-menu handle" text="2xl" cursor="move"></i>
+      <div v-for="(prop, index) of props" :key="index" flex="~" items="center" gap="x-2">
+        <i class="i-mdi-menu handle" text="2xl" cursor="move"></i>
         <div max="w-48">
           <el-input size="mini" v-model="prop.p">
             <template slot="prepend">msg.</template>
@@ -24,7 +24,7 @@
           :vt.sync="prop.vt"
         ></PropEditor>
         <button border="~" rounded="~" p="x-2" @click="handleRemove(index)">
-          <i class=" i-mdi-close"></i>
+          <i class="i-mdi-close"></i>
         </button>
       </div>
     </Draggable>
@@ -38,7 +38,7 @@
       p="x-4 y-1"
       @click="handleAddProp"
     >
-      <i class=" i-mdi-plus"></i>
+      <i class="i-mdi-plus"></i>
       添加
     </button>
   </div>

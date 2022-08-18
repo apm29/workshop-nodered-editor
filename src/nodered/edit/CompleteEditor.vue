@@ -7,6 +7,7 @@
         items="center"
         text="gray-500 sm"
         gap="x-5"
+        :key="node.id"
       >
         <el-checkbox :label="node.id">
           <span>{{ node.name }}</span>

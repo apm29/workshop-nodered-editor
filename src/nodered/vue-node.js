@@ -2,14 +2,13 @@ export function convertVueNodeToNodeRedJson(cells) {
   if (!cells) {
     throw Error("错误的x6数据");
   }
-  console.log(cells);
   const nodes = cells
     .filter((it) => !["dag-edge", "edge"].includes(it.shape))
     .map((it) => ({
       ...it.data,
       id: it.id,
-      x: it.position.x,
-      y: it.position.y,
+      x: parseFloat(it.position.x),
+      y: parseFloat(it.position.y),
       wires: [],
     }));
   const wires = cells.filter((it) => ["dag-edge", "edge"].includes(it.shape));
@@ -29,7 +28,6 @@ export function convertVueNodeToNodeRedJson(cells) {
       }, []);
     node.wires = wiresArr.filter((it) => it && it.every((c) => c));
   });
-  console.log(nodes);
   return nodes;
 }
 
@@ -40,8 +38,8 @@ export function convertNodeRedJsonToVueNode(noderedJson) {
   return {
     //节点
     nodes: (noderedJson || []).map((node) => ({
-      x: node.x || 0,
-      y: node.y || 0,
+      x: parseFloat(node.x) || 0,
+      y: parseFloat(node.y) || 0,
       id: node.id,
       shape: node.type,
       data: node,

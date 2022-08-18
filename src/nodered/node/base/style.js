@@ -9,8 +9,7 @@ export function useConnectedEdgeStyle(getGraphFn, getNodeFn, disabledRef) {
       .getEdges()
       .filter(
         (edge) =>
-          edge.target.cell === unref(node).id ||
-          edge.source.cell === unref(node).id
+          edge.target.cell === unref(node).id || edge.source.cell === unref(node).id
       )
   );
   //监听改变

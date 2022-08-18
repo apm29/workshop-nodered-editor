@@ -9,7 +9,7 @@
       handle=".handle"
       group="draggable-list"
     >
-      <div v-for="(rule, index) of rules" flex="~" items="center" gap="x-2">
+      <div v-for="(rule, index) of rules" :key="index" flex="~" items="center" gap="x-2">
         <i class=" i-mdi-menu handle" text="2xl" cursor="move"></i>
         <div max="w-48">
           <el-select size="mini" v-model="rule.t">

@@ -1,8 +1,9 @@
 import { remote } from "~/composables";
 import { localToken } from "~/composables";
-const JAVA_SUCCESS_CODE = "1";
+import { Message } from "element-ui";
 
-const loadingInstance = ref(null);
+const JAVA_SUCCESS_CODE = 200;
+const JAVA_SUCCESS_STATUS = "1";
 const loadingCount = ref(0);
 
 export const install = () => {
@@ -22,13 +23,13 @@ export const install = () => {
       return new Promise((resolve, reject) => {
         if (axiosResponse.status === 200) {
           //在此处进行响应拦截
-          if (axiosResponse.data.status === JAVA_SUCCESS_CODE) {
+          if (axiosResponse.data.code === JAVA_SUCCESS_CODE || axiosResponse.data.status === JAVA_SUCCESS_STATUS) {
             if (option.showSuccessMessage) {
-              alert(axiosResponse.data.msg || axiosResponse.data.text || "操作成功");
+              Message.success(axiosResponse.data.msg || axiosResponse.data.text || "操作成功");
             }
             resolve(axiosResponse.data);
           } else {
-            alert(axiosResponse.data.msg || axiosResponse.data.text);
+            Message.error(axiosResponse.data.msg || axiosResponse.data.text);
             reject(axiosResponse.data.msg);
           }
         } else {
@@ -40,19 +41,15 @@ export const install = () => {
 
     onInterceptRejectedRequest(error, option) {
       if (option.showErrorMessage && error) {
-        Notify({
-          message: error.message || String(error),
-          type: "danger",
-        });
+        Message.error(
+          error.message || String(error)
+        );
       }
       return error;
     },
     onInterceptRejectedResponse(error, option) {
       if (option.showErrorMessage && error) {
-        Notify({
-          message: error.message || String(error),
-          type: "danger",
-        });
+        Message.error(error.message || String(error));
       }
       return error;
     },

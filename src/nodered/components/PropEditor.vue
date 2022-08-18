@@ -6,7 +6,12 @@
       :value="vt"
       @input="$emit('update:vt', $event)"
     >
-      <el-option v-for="type of types" :label="type.text" :value="type.value">
+      <el-option
+        v-for="type of types"
+        :label="type.text"
+        :value="type.value"
+        :key="type.value"
+      >
       </el-option>
     </el-select>
     <el-input rounded="l-none" size="mini" :value="v" @input="$emit('update:v', $event)">

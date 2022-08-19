@@ -12,22 +12,12 @@
     <el-form-item label="宽度">
       <el-input-number v-model="config.width" placeholder="组件宽度"></el-input-number>
     </el-form-item>
-    <el-button type="primary" block="~" w="full" @click="saveConfig(config)">
-      保存
-    </el-button>
-    <el-button
-      plain
-      block="~"
-      w="full"
-      m="!l-0 t-3"
-      @click="cancelSaveConfig(config)"
-    >
-      取消
-    </el-button>
+   <Saver @save="saveConfig(config)" @cancel="cancelSaveConfig(config)"> </Saver>
   </el-form>
 </template>
 
 <script setup>
+import Saver from "./component/Saver.vue";
 import UiTab from "../edit/selector/UiTab";
 const props = defineProps({
   config: Object,

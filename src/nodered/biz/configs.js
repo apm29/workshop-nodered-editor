@@ -74,6 +74,26 @@ export function createConfigByType(type, id) {
         disabled: false,
         hidden: false,
       };
+    case "websocket-client":
+      return {
+        id: id || createNodeId(),
+        type: "websocket-client",
+        path: "",
+        tls: "",
+        wholemsg: "false",
+        hb: "0",
+        subprotocol: "",
+      };
+    case "websocket-listener":
+      return {
+        id: id || createNodeId(),
+        type: "websocket-listener",
+        path: "",
+        tls: "",
+        wholemsg: "false",
+        hb: "0",
+        subprotocol: "",
+      };
     default:
       return {
         id: id || createNodeId(),

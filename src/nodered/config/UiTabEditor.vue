@@ -22,23 +22,12 @@
       ></el-switch>
     </el-form-item>
 
-    <el-button type="primary" block="~" w="full" @click="saveConfig(config)">
-      保存
-    </el-button>
-    <el-button
-      plain
-      block="~"
-      w="full"
-      m="!l-0 t-3"
-      @click="cancelSaveConfig(config)"
-    >
-      取消
-    </el-button>
+    <Saver @save="saveConfig(config)" @cancel="cancelSaveConfig(config)"> </Saver>
   </el-form>
 </template>
 
 <script setup>
-import { inject, computed, ref, toRefs } from "vue";
+import Saver from "./component/Saver.vue";
 const props = defineProps({
   config: Object,
 });

@@ -87,22 +87,12 @@
         </el-collapse>
       </el-tab-pane>
     </el-tabs>
-    <el-button type="primary" block="~" w="full" @click="saveConfig(config)">
-      保存
-    </el-button>
-    <el-button
-      plain
-      block="~"
-      w="full"
-      m="!l-0 t-3"
-      @click="cancelSaveConfig(config)"
-    >
-      取消
-    </el-button>
+    <Saver @save="saveConfig(config)" @cancel="cancelSaveConfig(config)"> </Saver>
   </el-form>
 </template>
 
 <script setup>
+import Saver from "./component/Saver.vue";
 import LifecycleMessage from "./mqtt-broker/LifecycleMessage.vue";
 const props = defineProps({
   config: Object,

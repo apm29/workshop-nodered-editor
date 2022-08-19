@@ -1,7 +1,6 @@
 <template>
-  <BaseNode icon-left="i-mdi-flash" fill="#4E7CA1" :disabled="disabled">
+  <BaseNode icon-left="i-mdi-earth" fill="#3abb11" :disabled="disabled">
     {{ label }}
-    <i i-mdi-refresh v-if="repeat"></i>
   </BaseNode>
 </template>
 
@@ -17,19 +16,20 @@ const getNode = inject("getNode");
 const node = computed(getNode);
 const graph = computed(getGraph);
 const data = computed(() => unref(node)?.data);
-const label = computed(() => unref(data)?.name || "注入");
+const label = computed(() => unref(data)?.name || "Websocket In");
 const disabled = computed(() => unref(data)?.d ?? false);
-const repeat = computed(() => !!unref(data)?.repeat);
 
 //添加port
 usePorts(node, 1, "out");
 
 useConnectedEdgeStyle(getGraph, getNode, disabled);
 </script>
+
 <script>
 export default {
-  name: "Inject",
-  type: "inject",
+  name: "websocketin",
+  type: "websocket in",
 };
 </script>
+
 <style lang="scss" scoped></style>

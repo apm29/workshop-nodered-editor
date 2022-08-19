@@ -25,11 +25,15 @@ import Vue from "vue";
 
 
 const components = import.meta.globEager('./*.vue');
+const registered = []
 for (const path in components) {
   const result = path.match(/.*\/(.+).vue$/);
   if (result) {
     const name = result[1];
     const component = components[path];
     Vue.component(name, component.default);
+    registered.push(name)
   }
 }
+
+console.table(registered)

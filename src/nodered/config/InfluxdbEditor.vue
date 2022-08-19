@@ -40,16 +40,12 @@
     <template v-if="config.influxdbVersion !== '1.x'">
       <el-checkbox label="身份验证" v-model="config.rejectUnauthorized"></el-checkbox>
     </template>
-    <el-button type="primary" block="~" w="full" @click="saveConfig(config)">
-      保存
-    </el-button>
-    <el-button plain block="~" w="full" m="!l-0 t-3" @click="cancelSaveConfig(config)">
-      取消
-    </el-button>
+    <Saver @save="saveConfig(config)" @cancel="cancelSaveConfig(config)"> </Saver>
   </el-form>
 </template>
 
 <script setup>
+import Saver from "./component/Saver.vue";
 const props = defineProps({
   config: Object,
 });

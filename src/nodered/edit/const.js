@@ -67,6 +67,42 @@ export const SwitchPropertyTypes = [
     value: "msg",
   },
 ];
+export const SwitchValueTypes = [
+  {
+    text: "msg.",
+    value: "msg",
+  },
+  {
+    text: "flow.",
+    value: "flow",
+  },
+  {
+    text: "global.",
+    value: "global",
+  },
+  {
+    text: "文字列",
+    value: "str",
+  },
+  {
+    text: "数字",
+    value: "num",
+  },
+  {
+    text: "表达式",
+    value: "jsonata",
+  },
+  {
+    text: "环境变量",
+    value: "env",
+  },
+  {
+    text: "先前值",
+    value: "prev",
+    noInput: true
+  },
+
+];
 
 export const MqttOutputTypes = [
   {

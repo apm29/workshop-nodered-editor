@@ -51,7 +51,7 @@ onMounted(() => {
   monacoEditor.onDidChangeModelContent(() => {
     const currentValue = monacoEditor?.getValue();
     internalValue.value = currentValue;
-    emits("inpouut", currentValue);
+    emits("input", currentValue);
   });
 });
 

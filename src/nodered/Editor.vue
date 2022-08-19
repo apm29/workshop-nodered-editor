@@ -192,7 +192,7 @@ function handleNodeEdit({ data, node }) {
   const wires = getNodeRedWiresFromX6Edges(edges);
   data.wires = wires;
   //先手动保存下节点
-  handleGraphDataChange();
+  // handleGraphDataChange();
   nextTick(() => emits("node:edit", data, node));
 }
 //节点在上层保存后同步下数据

@@ -8,13 +8,14 @@
     </el-form-item>
     <el-tabs m="b-3">
       <el-tab-pane label="函数" lazy>
-        <el-input type="textarea" :rows="8" v-model="data.func"></el-input>
+        <CodeEditor v-model="data.func"></CodeEditor>
+        <!-- <el-input type="textarea" :rows="8" v-model="data.func"></el-input> -->
       </el-tab-pane>
       <el-tab-pane label="初始化" lazy>
-        <el-input type="textarea" :rows="8" v-model="data.initialize"></el-input>
+        <CodeEditor v-model="data.initialize"></CodeEditor>
       </el-tab-pane>
       <el-tab-pane label="结束" lazy>
-        <el-input type="textarea" :rows="8" v-model="data.finalize"></el-input>
+        <CodeEditor v-model="data.finalize"></CodeEditor>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -22,6 +23,7 @@
 
 <script setup>
 import LibraryImporter from "./function/LibraryImporter.vue";
+import CodeEditor from "./function/CodeEditor.vue";
 defineProps({
   data: Object,
 });

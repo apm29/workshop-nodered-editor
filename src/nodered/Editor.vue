@@ -12,12 +12,13 @@
         <div
           v-show="showMinimap"
           class="minimap"
-          bg="white"
+          bg="gray-200"
+          border="~"
           shadow="~"
           z="30"
           absolute="~"
-          right="4"
-          bottom="4"
+          left="0"
+          top="0"
         >
           <div ref="minimapContainer" id="minimap"></div>
         </div>

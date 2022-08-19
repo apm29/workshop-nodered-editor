@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "buildWTF": "node --max_old_space_size=16384 ./node_modules/vite/bin/vite.js",
     "preview": "vite preview"
   },
   "dependencies": {

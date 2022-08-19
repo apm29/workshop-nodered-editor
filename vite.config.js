@@ -18,6 +18,7 @@ export default defineConfig({
           "element-ui": ["element-ui"],
           "@antv/x6": ["@antv/x6"],
         },
+        sourcemap: false
       },
     },
   },

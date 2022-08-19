@@ -1,5 +1,5 @@
 <template>
-  <BaseNode icon-left="i-mdi-earth" fill="#FCB70A" :disabled="disabled">
+  <BaseNode icon-right="i-mdi-earth" fill="#FCB70A" :disabled="disabled">
     {{ label }}
   </BaseNode>
 </template>
@@ -16,19 +16,19 @@ const getNode = inject("getNode");
 const node = computed(getNode);
 const graph = computed(getGraph);
 const data = computed(() => unref(node)?.data);
-const label = computed(() => unref(data)?.name || "Websocket In");
+const label = computed(() => unref(data)?.name || "Websocket Out");
 const disabled = computed(() => unref(data)?.d ?? false);
 
 //添加port
-usePorts(node, 1, "out");
+usePorts(node, 1, "in");
 
 useConnectedEdgeStyle(getGraph, getNode, disabled);
 </script>
 
 <script>
 export default {
-  name: "websocketin",
-  type: "websocket in",
+  name: "websocketout",
+  type: "websocket out",
 };
 </script>
 

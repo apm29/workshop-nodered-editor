@@ -64,5 +64,5 @@ export const NodeTypes = [
   "ui_template",
 ];
 
-export const ConfigTypes = ["mqtt-broker", "influxdb", "ui_group", "ui_tab"];
+export const ConfigTypes = ["mqtt-broker", "influxdb", "websocket-client", "websocket-listener", "ui_group", "ui_tab"];
 export const TabTypes = ["tab"];

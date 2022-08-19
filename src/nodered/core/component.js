@@ -255,6 +255,16 @@ export function useCreateStencil(getGraphFn, getStencilContainerFn) {
           "client": "",
         },
       }),
+      graph.createNode({
+        shape: "websocket out",
+        data: {
+          type: "websocket out",
+          name: "Websocket out",
+          "name": "",
+          "server": "",
+          "client": "",
+        },
+      }),
     ];
     stencil.load(templates);
     stencilInstance.value = stencil;

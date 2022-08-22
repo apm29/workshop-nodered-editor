@@ -6,6 +6,7 @@ import {
 } from "../vue-node";
 import { NodeTypes, ConfigTypes, TabTypes } from "../preset";
 import { postNodeRedJsonByFlowId, getNodeRedJsonByFlowId } from "~/api/nodered"
+import { MessageBox } from "element-ui";
 const LocalNodes = useLocalStorage("local-nodes", []);
 const LocalConfigs = useLocalStorage("local-configs", []);
 const LocalTabs = useLocalStorage("local-tabs", []);
@@ -43,8 +44,9 @@ export function useNodes(getFlowIdFn) {
   }
   watch(flowId, pullNodesFromServer, { immediate: true })
 
-  function pushNodesToServer() {
-    return postNodeRedJsonByFlowId(unref(flowId), unref(nodes), unref(configs))
+  async function pushNodesToServer() {
+    const { value } = await MessageBox.prompt("输入流程名称", "提示")
+    return postNodeRedJsonByFlowId(unref(flowId), unref(nodes), unref(configs), value)
   }
 
   return {

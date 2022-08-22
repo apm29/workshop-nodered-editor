@@ -17,7 +17,7 @@ function getMinProperty(array, getPropertyFn, zeroBase) {
   return minPropertyValue === 0 ? - zeroBase : minPropertyValue;
 }
 
-export function postNodeRedJsonByFlowId(flowId, nodes, configs) {
+export function postNodeRedJsonByFlowId(flowId, nodes, configs, label) {
   const minX = getMinProperty(nodes, (it) => it.x, 150)
   const minY = getMinProperty(nodes, (it) => it.y, 30)
   console.log(minX, minY);
@@ -27,7 +27,7 @@ export function postNodeRedJsonByFlowId(flowId, nodes, configs) {
       param: JSON.stringify({
         id: flowId,
         type: "tab",
-        label: "回火窑温度测试",
+        label: label,
         disabled: false,
         info: "",
         env: [],

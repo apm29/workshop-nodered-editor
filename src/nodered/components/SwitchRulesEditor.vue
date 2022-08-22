@@ -66,12 +66,19 @@
         </div>
         <i class="i-mdi-arrow-right" text="gray-500"></i>
         <span font="bold">{{ index + 1 }}</span>
-        <button border="~" rounded="~" p="x-2" @click="handleRemove(index)">
-          <i class="i-mdi-close"></i>
-        </button>
+        <el-button
+          border="~"
+          rounded="~"
+          p="x-2"
+          @click="handleRemove(index)"
+          icon="el-icon-close"
+          type="danger"
+          plain
+        >
+        </el-button>
       </div>
     </Draggable>
-    <button
+    <el-button
       m="t-4"
       border="~"
       rounded="~"
@@ -80,10 +87,10 @@
       text="gray-500 sm"
       p="x-4 y-1"
       @click="handleAddProp"
+      icon="el-icon-plus"
     >
-      <i class="i-mdi-plus"></i>
       添加
-    </button>
+    </el-button>
   </div>
 </template>
 

@@ -1,6 +1,13 @@
 <template>
-  <div flex="~ grow" items="center" border="~ gray-200" bg="gray-200">
-    <el-select w="full" size="mini" :value="vt" @input="$emit('update:vt', $event)">
+  <div
+    class="prop-editor"
+    flex="~ grow"
+    items="center"
+    border="~ gray-200"
+    rounded="~"
+    divide="x-1"
+  >
+    <el-select flex="grow" size="mini" :value="vt" @input="$emit('update:vt', $event)">
       <el-option
         v-for="type of types"
         :label="type.text"
@@ -9,7 +16,14 @@
       >
       </el-option>
     </el-select>
-    <el-input v-if="!noInput" size="mini" :value="v" @input="$emit('update:v', $event)">
+    <el-input
+      flex="grow"
+      v-if="!noInput"
+      size="mini"
+      :value="v"
+      placeholder="输入值"
+      @input="$emit('update:v', $event)"
+    >
     </el-input>
   </div>
 </template>
@@ -30,4 +44,10 @@ const noInput = computed(
 );
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.prop-editor {
+  .el-input__inner {
+    @apply border-none;
+  }
+}
+</style>

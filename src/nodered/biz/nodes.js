@@ -46,7 +46,8 @@ export function useNodes(getFlowIdFn) {
 
   async function pushNodesToServer() {
     const { value } = await MessageBox.prompt("输入流程名称", "提示")
-    return postNodeRedJsonByFlowId(unref(flowId), unref(nodes), unref(configs), value)
+    const tabName = tabs.value[0]?.label ?? "Flow 01"
+    return postNodeRedJsonByFlowId(unref(flowId), unref(nodes), unref(configs), value || tabName)
   }
 
   return {

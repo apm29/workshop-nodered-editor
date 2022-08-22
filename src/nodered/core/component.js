@@ -96,7 +96,7 @@ export function useCreateStencil(getGraphFn, getStencilContainerFn) {
             },
           ],
           repeat: "",
-          crontab: "*/1 * * * *",
+          crontab: "",
           once: false,
           onceDelay: 0.1,
           topic: "",
@@ -209,21 +209,43 @@ export function useCreateStencil(getGraphFn, getStencilContainerFn) {
       //     name: "执行",
       //   },
       // }),
-      // graph.createNode({
-      //   shape: "http request",
-      //   data: {
-      //     type: "http request",
-      //     name: "Http请求",
-      //     method: "GET",
-      //     ret: "txt",
-      //     paytoqs: false,
-      //     url: "",
-      //     persist: false,
-      //     authType: "",
-      //     senderr: false,
-      //     headers: [],
-      //   },
-      // }),
+      graph.createNode({
+        shape: "http request",
+        data: {
+          type: "http request",
+          name: "Http请求",
+          method: "GET",
+          ret: "txt",
+          paytoqs: "ignore",
+          url: "",
+          persist: false,
+          authType: "",
+          senderr: false,
+          headers: [],
+        },
+      }),
+
+      graph.createNode({
+        shape: "websocket in",
+        data: {
+          type: "websocket in",
+          name: "Websocket In",
+          "name": "",
+          "server": "",
+          "client": "",
+        },
+      }),
+      graph.createNode({
+        shape: "websocket out",
+        data: {
+          type: "websocket out",
+          name: "Websocket out",
+          "name": "",
+          "server": "",
+          "client": "",
+        },
+      }),
+
       graph.createNode({
         shape: "ui_gauge",
         data: {
@@ -243,26 +265,6 @@ export function useCreateStencil(getGraphFn, getStencilContainerFn) {
           seg1: "",
           seg2: "",
           className: "",
-        },
-      }),
-      graph.createNode({
-        shape: "websocket in",
-        data: {
-          type: "websocket in",
-          name: "Websocket In",
-          "name": "",
-          "server": "",
-          "client": "",
-        },
-      }),
-      graph.createNode({
-        shape: "websocket out",
-        data: {
-          type: "websocket out",
-          name: "Websocket out",
-          "name": "",
-          "server": "",
-          "client": "",
         },
       }),
     ];

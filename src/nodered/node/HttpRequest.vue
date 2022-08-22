@@ -1,5 +1,5 @@
 <template>
-  <BaseNode icon-left="i-mdi-connection" fill="#FECC11" :disabled="disabled">
+  <BaseNode icon-left="i-mdi-connection" fill="#DE2A18" :disabled="disabled">
     {{ label }}
   </BaseNode>
 </template>

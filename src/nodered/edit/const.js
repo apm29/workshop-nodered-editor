@@ -18,6 +18,17 @@ export const MsgTypes = [
   {
     text: "布尔值",
     value: "bool",
+    selection: [
+      {
+        value: true,
+        text: "true",
+      },
+      {
+        value: false,
+        text: "false",
+      }
+    ],
+    noInput: true
   },
   {
     text: "JSON",
@@ -30,6 +41,7 @@ export const MsgTypes = [
   {
     text: "时间戳",
     value: "date",
+    noInput: true
   },
   {
     text: "表达式",

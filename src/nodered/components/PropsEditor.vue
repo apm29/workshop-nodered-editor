@@ -23,24 +23,18 @@
           :v.sync="prop.v"
           :vt.sync="prop.vt"
         ></PropEditor>
-        <button border="~" rounded="~" p="x-2" @click="handleRemove(index)">
-          <i class="i-mdi-close"></i>
-        </button>
+        <el-button
+          type="danger"
+          plain
+          size="mini"
+          @click="handleRemove(index)"
+          icon="el-icon-close"
+        >
+        </el-button>
       </div>
     </Draggable>
-    <button
-      m="t-4"
-      border="~"
-      rounded="~"
-      cursor="pointer"
-      bg="hover:gray-200"
-      text="gray-500 sm"
-      p="x-4 y-1"
-      @click="handleAddProp"
-    >
-      <i class="i-mdi-plus"></i>
-      添加
-    </button>
+    <div h="4"></div>
+    <el-button size="mini" @click="handleAddProp" icon="el-icon-plus"> 添加 </el-button>
   </div>
 </template>
 

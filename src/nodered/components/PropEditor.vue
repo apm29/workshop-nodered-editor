@@ -25,6 +25,20 @@
       @input="$emit('update:v', $event)"
     >
     </el-input>
+    <el-select
+      size="mini"
+      v-if="selection && selection.length"
+      :value="v"
+      placeholder="输入值"
+      @input="$emit('update:v', $event)"
+    >
+      <el-option
+        v-for="option of selection"
+        :key="option.value"
+        :value="option.value"
+        :label="option.text"
+      ></el-option>
+    </el-select>
   </div>
 </template>
 
@@ -41,6 +55,9 @@ const props = defineProps({
 
 const noInput = computed(
   () => props.types.find((t) => t.value === props.vt)?.noInput ?? false
+);
+const selection = computed(
+  () => props.types.find((t) => t.value === props.vt)?.selection ?? []
 );
 </script>
 

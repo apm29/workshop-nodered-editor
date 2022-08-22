@@ -1,9 +1,7 @@
-<script setup>
-import Config from "~/views/config.vue";
-</script>
+<script setup></script>
 
 <template>
-  <Config h="screen" w="screen" overflow="hidden"></Config>
+  <router-view h="screen" w="screen" overflow="hidden"></router-view>
 </template>
 
 <style scoped></style>

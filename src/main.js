@@ -5,8 +5,12 @@ import '~/style.css'
 import 'uno.css'
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from "element-ui";
+import VueRouter from "vue-router";
+import router from '~/router'
 Vue.use(ElementUI)
+Vue.use(VueRouter)
 const app = new Vue({
+  router,
   render: (h) => h(App),
 })
 

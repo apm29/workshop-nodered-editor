@@ -8,6 +8,7 @@ import legacy from "@vitejs/plugin-legacy";
 import Unocss from "unocss/vite";
 import { splitVendorChunkPlugin } from "vite";
 import requireContext from "rollup-plugin-require-context"; // 处理兼容webpack工具require-context;
+import Pages from 'vite-plugin-pages'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/nodered/",
@@ -65,6 +66,11 @@ export default defineConfig({
       targets: ["defaults", "not ie < 9"],
     }),
     splitVendorChunkPlugin(),
+    Pages({
+      dirs: [
+        { dir: 'src/views', baseRoute: '' },
+      ],
+    })
   ],
   server: {
     port: 7456,

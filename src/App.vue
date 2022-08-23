@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-  <router-view h="screen" w="screen" overflow="hidden"></router-view>
+  <keep-alive>
+    <router-view h="screen" w="screen" overflow="hidden"></router-view>
+  </keep-alive>
 </template>
 
 <style scoped></style>

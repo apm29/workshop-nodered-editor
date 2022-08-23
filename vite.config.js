@@ -18,6 +18,7 @@ export default defineConfig({
         manualChunks: {
           "element-ui": ["element-ui"],
           "@antv/x6": ["@antv/x6"],
+          "@antv/g6": ["@antv/g6"],
           jsonWorker: [`monaco-editor/esm/vs/language/json/json.worker`],
           tsWorker: [`monaco-editor/esm/vs/language/typescript/ts.worker`],
           editorWorker: [`monaco-editor/esm/vs/editor/editor.worker`],
@@ -66,6 +67,7 @@ export default defineConfig({
       targets: ["defaults", "not ie < 9"],
     }),
     splitVendorChunkPlugin(),
+
     Pages({
       dirs: [
         { dir: 'src/views', baseRoute: '' },

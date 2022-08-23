@@ -1,5 +1,5 @@
 <template>
-  <el-tabs class="device-topography bg-white" type="border-card">
+  <el-tabs class="device-topography bg-white" tab-position="left" type="border-card">
     <el-tab-pane label="电箱" lazy>
       <EBox :type-dict="topographyTables" />
     </el-tab-pane>
@@ -26,11 +26,6 @@
     </el-tab-pane>
   </el-tabs>
 </template>
-<script>
-export default {
-  name: "DeviceTopograghyDict",
-};
-</script>
 <script setup>
 import EBox from "~/device/maintanence/EBox.vue";
 import Switchs from "~/device/maintanence/Switchs.vue";
@@ -47,13 +42,13 @@ const { topographyTables } = useDeviceTopographyTableNames();
 </script>
 <style lang="scss">
 .device-topography {
-  @apply flex flex-col pb-5 h-full;
+  @apply flex h-full border;
   .el-tabs__content {
     @apply flex-grow  border-l border-r border-b shadow p-1;
   }
 
   .el-tab-pane {
-    @apply h-full overflow-auto 
+    @apply h-full overflow-auto
     scrollbar-thin  scrollbar-thumb-gray-300  scrollbar-track-gray-100 scrollbar-thumb-rounded;
   }
 

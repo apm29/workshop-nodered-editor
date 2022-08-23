@@ -39,3 +39,6 @@ button {
   line-height: initial;
 }
 
+.el-loading-spinner svg {
+  display: inline-block;
+}

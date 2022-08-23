@@ -1,5 +1,5 @@
 <template>
-  <div flex="~" p="x-12 y-10" items="start" gap="8" bg="dark-300">
+  <div flex="~" p="x-12 y-10" items="start" gap="8" bg="dark-500">
     <router-link class="router-link" to="/device-maintanence">
       <i i-mdi-devices></i>
       设备维护

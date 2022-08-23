@@ -111,5 +111,3 @@ async function loadNodeChildren(parent) {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>

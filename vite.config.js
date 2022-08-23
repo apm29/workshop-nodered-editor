@@ -68,11 +68,7 @@ export default defineConfig({
     }),
     splitVendorChunkPlugin(),
 
-    Pages({
-      dirs: [
-        { dir: 'src/views', baseRoute: '' },
-      ],
-    })
+    Pages({})
   ],
   server: {
     port: 7456,

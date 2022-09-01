@@ -8,6 +8,9 @@
       ref="viewer"
       :tree="treeData"
       :load="loadTreeChildNodes"
+      @node:delete="handleDeleteDevice"
+      @node:add="handleAddChildDevice"
+      @node:edit="handleEditDevice"
       h="screen"
       w="screen"
     ></Viewer>
@@ -38,6 +41,25 @@
         加载全部
       </el-button>
     </div>
+
+    <MountedDeviceEditor
+      v-model="showEditDevice"
+      :node-id="currentEditNodeId"
+      :parent-node-id="currentEditNodeParentId"
+      :parent-node-level="currentEditNodeParentLevel"
+      :table-dict="topographyTables"
+      :hub-dict="hubDict"
+      :net-dict="netDict"
+      :collector-dict="collectorDict"
+      :scanner-dict="scannerDict"
+      :reader-dict="readerDict"
+      :electricity-box-dict="electricityBoxDict"
+      :sensor-dict="sensorDict"
+      :switch-dict="switchDict"
+      @saved="loadTreeChildNodes"
+      @device:add="getDict"
+      @device:mount="loadTreeChildNodes"
+    ></MountedDeviceEditor>
   </div>
 </template>
 
@@ -50,6 +72,20 @@ import {
 import { Notification } from "element-ui";
 import { getFlattenTreeNodes } from "~/helpers/tree";
 import Viewer from "~/device/Viewer.vue";
+import MountedDeviceEditor from "~/device/MountedDeviceEditor.vue";
+import {
+  useDeviceTopographyTableNames,
+  use485HubDict,
+  use485NetDict,
+  useCollectorDict,
+  useElectricityBoxDict,
+  useSensorDict,
+  useSwitchDict,
+  useScannerDict,
+  useReaderDict,
+  DeviceTopographyTables,
+} from "~/composables";
+
 const NODE_ROOT_ID = "0";
 const ROOT_NODE = {
   id: NODE_ROOT_ID,
@@ -109,5 +145,74 @@ async function loadNodeChildren(parent) {
   if (parent.children && parent.children.length) {
     await Promise.all(parent.children.map((child) => loadNodeChildren(child)));
   }
+}
+
+//字典
+const { topographyTables } = useDeviceTopographyTableNames();
+const { get485HubDict, hubDict } = use485HubDict();
+const { get485NetDict, netDict } = use485NetDict();
+const { getCollectorDict, collectorDict } = useCollectorDict();
+const { getElectricityBoxDict, electricityBoxDict } = useElectricityBoxDict();
+const { getSensorDict, sensorDict } = useSensorDict();
+const { getSwitchDict, switchDict } = useSwitchDict();
+const { getScannerDict, scannerDict } = useScannerDict();
+const { getReaderDict, readerDict } = useReaderDict();
+
+onMounted(get485HubDict);
+onMounted(get485NetDict);
+onMounted(getCollectorDict);
+onMounted(getElectricityBoxDict);
+onMounted(getSensorDict);
+onMounted(getSwitchDict);
+onMounted(getScannerDict);
+onMounted(getReaderDict);
+
+function getDict(tableName) {
+  switch (tableName) {
+    case DeviceTopographyTables.HUB:
+      return get485HubDict();
+    case DeviceTopographyTables.NET:
+      return get485NetDict();
+    case DeviceTopographyTables.COLLECTOR:
+      return getCollectorDict();
+    case DeviceTopographyTables.EBOX:
+      return getElectricityBoxDict();
+    case DeviceTopographyTables.SENSOR:
+      return getSensorDict();
+    case DeviceTopographyTables.SWITCH:
+      return getSwitchDict();
+    case DeviceTopographyTables.SCANNER:
+      return getScannerDict();
+    case DeviceTopographyTables.READER:
+      return getReaderDict();
+    default:
+      return;
+  }
+}
+
+//删除
+async function handleDeleteDevice(id, parentId) {
+  await deleteDeviceTopoTreeNode(id);
+  await loadTreeChildNodes(parentId);
+}
+
+//新增
+const [showEditDevice, toggleEditDevice] = useToggle();
+const currentEditNodeParentId = ref();
+const currentEditNodeParentLevel = ref();
+const currentEditNodeId = ref();
+async function handleAddChildDevice(parentId, parentLevel) {
+  showEditDevice.value = true;
+  currentEditNodeParentId.value = parentId;
+  currentEditNodeParentLevel.value = parentLevel;
+  currentEditNodeId.value = null;
+}
+
+//编辑挂载的设备
+async function handleEditDevice(nodeId, parentId, parentLevel) {
+  showEditDevice.value = true;
+  currentEditNodeParentId.value = parentId;
+  currentEditNodeParentLevel.value = parentLevel;
+  currentEditNodeId.value = nodeId;
 }
 </script>

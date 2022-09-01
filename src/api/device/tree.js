@@ -59,3 +59,20 @@ export function updateDeviceTopoTreeNode({
     },
   });
 }
+
+export function addDeviceTopoTreeNode({
+  businessId,
+  businessName,
+  businessTableName,
+  parentId,
+}) {
+  return remote.postForm({
+    url: "/java/topoTree/add",
+    data: {
+      businessId,
+      businessName,
+      businessTableName,
+      parentId,
+    },
+  });
+}

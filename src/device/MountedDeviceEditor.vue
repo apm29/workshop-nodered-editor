@@ -138,12 +138,12 @@ import ScannerSelector from "./selector/ScannerSelector.vue";
 import ReaderSelector from "./selector/ReaderSelector.vue";
 import SensorSelector from "./selector/SensorSelector.vue";
 import SwitchSelector from "./selector/SwitchSelector.vue";
-import { DeviceTopographyTables } from "@/composables";
+import { DeviceTopographyTables } from "~/composables";
 import {
   addDeviceTopoTreeNode,
   updateDeviceTopoTreeNode,
   getDeviceTopoTreeNode,
-} from "@/api/device-topography";
+} from "~/api/device/tree.js";
 import { useToggle } from "@vueuse/core";
 import { Message } from "element-ui";
 const props = defineProps({

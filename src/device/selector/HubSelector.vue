@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref } from "@vue/composition-api";
+import { ref } from "vue";
 const props = defineProps({
   id: {
     type: [String, Number],

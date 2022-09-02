@@ -1,4 +1,4 @@
-import { remote } from "~/composables";
+import { remote, DeviceTopographyTables } from "~/composables";
 //业务设备添加
 export function addDevice({
   id,
@@ -69,6 +69,7 @@ export function addDevice({
           ip,
           name,
           remark,
+          level,
           isMyown,
         },
       });
@@ -80,6 +81,7 @@ export function addDevice({
           ip,
           name,
           remark,
+          level,
           isMyown,
         },
       });
@@ -91,6 +93,7 @@ export function addDevice({
           indexCode,
           ip,
           remark,
+          level,
           isMyown,
         },
       });
@@ -102,6 +105,7 @@ export function addDevice({
           indexCode,
           ip,
           remark,
+          level,
           isMyown,
         },
       });

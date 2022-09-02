@@ -7,7 +7,7 @@
     @input="$emit('input', $event)"
   >
     <h3 class="mb-3 text-lg font-bold text-dark-400">
-      {{ id ? "编辑" : "新增子级" }}
+      {{ id ? "编辑挂载设备" : "新增子级设备" }}
     </h3>
     <el-form size="mini" label-width="8rem" :model="mountedFormData">
       <el-form-item :label="mountedFormData.id ? '当前设备等级' : '父级设备等级'">
@@ -93,7 +93,7 @@
           type="warning"
           class="ml-2"
           icon="el-icon-plus"
-          @click="toggleShowAddDevice"
+          @click="toggleShowAddDevice()"
         >
           添加设备
         </el-button>

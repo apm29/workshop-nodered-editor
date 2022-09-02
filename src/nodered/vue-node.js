@@ -1,3 +1,4 @@
+import { ImplementedNodeTypes } from "./preset.js"
 export function convertVueNodeToNodeRedJson(cells) {
   if (!cells) {
     throw Error("错误的x6数据");
@@ -44,7 +45,7 @@ export function convertNodeRedJsonToVueNode(noderedJson) {
       x: parseFloat(node.x) || 0,
       y: parseFloat(node.y) || 0,
       id: node.id,
-      shape: node.type,
+      shape: ImplementedNodeTypes.includes(node.type) ? node.type : "unknown",
       data: node,
     })),
     //边

@@ -64,5 +64,25 @@ export const NodeTypes = [
   "ui_template",
 ];
 
+export const ImplementedNodeTypes = [
+  "comment",
+  "debug",
+  "inject",
+  "complete",
+  "status",
+  "function",
+  "switch",
+  "delay",
+  "exec",
+  "mqtt in",
+  "mqtt out",
+  "http request",
+  "websocket in",
+  "websocket out",
+  "influxdb in",
+  "influxdb out",
+  "ui_gauge",
+];
+
 export const ConfigTypes = ["mqtt-broker", "influxdb", "websocket-client", "websocket-listener", "ui_group", "ui_tab"];
 export const TabTypes = ["tab"];

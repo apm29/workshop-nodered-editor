@@ -13,6 +13,7 @@ import BaseNode from "./base/BaseNode.vue";
 import { inject, computed, unref, watch } from "vue";
 import { useConnectedEdgeStyle } from "./base/style.js";
 import { usePorts } from "./base/ports.js";
+import { useLabels } from "./base/label-width.js";
 //inject: ["getGraph", "getNode"],
 const getGraph = inject("getGraph");
 const getNode = inject("getNode");
@@ -28,6 +29,8 @@ usePorts(node, 1, "in");
 usePorts(node, 1, "out");
 
 useConnectedEdgeStyle(getGraph, getNode, disabled);
+
+useLabels(getNode, label);
 </script>
 
 <script>

@@ -29,11 +29,11 @@
         :style="`background-color: ${fill || 'lightgray'};`"
       >
         <slot name="icon-left" v-if="iconLeft">
-          <i class=" text-white mx-2" :class="iconLeft"></i>
+          <i class="text-white mx-2" :class="iconLeft"></i>
         </slot>
       </span>
       <span
-        text="gray-400 xs"
+        text="gray-600 12px"
         flex="~ grow"
         h="full"
         break="all"
@@ -49,7 +49,7 @@
         :style="`background-color: ${fill || 'lightgray'};`"
       >
         <slot name="icon-right" v-if="iconRight">
-          <i class=" text-white mx-2" :class="iconRight"></i>
+          <i class="text-white mx-2" :class="iconRight"></i>
         </slot>
       </span>
     </div>

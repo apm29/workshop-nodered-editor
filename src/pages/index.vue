@@ -1,5 +1,5 @@
 <template>
-  <div flex="~" p="x-12 y-10" items="start" gap="8" bg="dark-500">
+  <div flex="~ wrap" p="x-12 y-10" items="start" justify="around" gap="8" bg="dark-500">
     <router-link class="router-link" to="/device-maintanence">
       <i i-mdi-devices></i>
       设备维护
@@ -16,7 +16,12 @@
 </template>
 
 <script setup>
-import router from "~/router";
+import { isMobile } from "~/helpers/device";
+import { useRouter } from "~/composables";
+const router = useRouter();
+if (isMobile()) {
+  router.push("/mobile");
+}
 </script>
 
 <style lang="scss" scoped>

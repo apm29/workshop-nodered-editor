@@ -35,7 +35,7 @@
         v-if="!isRootNode"
         type="text"
         icon="el-icon-delete"
-        class="!ml-0 text-red-500 hover:text-red-400"
+        class="!ml-0 !text-red-500 !hover:text-red-400"
         @click="handleDeleteDevice"
       >
         删除设备

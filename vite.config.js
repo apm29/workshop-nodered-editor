@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import vitePluginVue from "@vitejs/plugin-vue2";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementUiResolver } from "unplugin-vue-components/resolvers";
+import { VantResolver } from "unplugin-vue-components/resolvers";
 import legacy from "@vitejs/plugin-legacy";
 import Unocss from "unocss/vite";
 import { splitVendorChunkPlugin } from "vite";
@@ -62,7 +62,9 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
-
+    Components({
+      resolvers: [VantResolver()],
+    }),
     legacy({
       targets: ["defaults", "not ie < 9"],
     }),

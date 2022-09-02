@@ -8,6 +8,7 @@
     <el-option
       v-for="device of dict"
       :value="device"
+      :key="device.id"
       :label="`${device.name}(等级${device.level})`"
     >
     </el-option>

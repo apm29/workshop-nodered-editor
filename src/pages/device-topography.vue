@@ -326,6 +326,11 @@ function getNodeDeviceType(tableName) {
   return topographyTables.find((t) => t.tableName === tableName)?.name ?? " -- ";
 }
 
+const router = useRouter();
+function handleConfigDevice(id) {
+  router.push("/device-config?flowId=f6f2187d.f17ca8");
+}
+
 //容器
 const main = ref();
 const { width } = useElementSize(main);

@@ -6,6 +6,7 @@
     element-loading-spinner="el-icon-loading"
     :value="showEditDevice"
     @input="$emit('input', $event)"
+    content-class="w-full"
   >
     <h3 class="mb-3 text-lg font-bold text-dark-400">添加设备</h3>
     <el-form size="mini" label-width="8rem" :model="formData">

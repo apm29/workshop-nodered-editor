@@ -249,7 +249,7 @@ function viewInit() {
       },
       // 边在默认状态下的样式配置（style）和其他配置
       defaultEdge: {
-        type: "line", //"cubic-vertical",
+        type: "cubic-vertical", //"cubic-vertical",
         style: {
           stroke: "#DE2A18",
         },

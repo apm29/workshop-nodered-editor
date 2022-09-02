@@ -3,8 +3,10 @@
     v-loading="loading"
     element-loading-text="拼命加载中"
     element-loading-spinner="el-icon-loading"
+    ref="main"
   >
     <Viewer
+      v-if="showGraph"
       ref="viewer"
       :tree="treeData"
       :load="loadTreeChildNodes"
@@ -14,6 +16,82 @@
       h="screen"
       w="screen"
     ></Viewer>
+
+    <el-tree
+      v-if="!showGraph"
+      v-loading="loading"
+      element-loading-text="拼命加载中"
+      element-loading-spinner="el-icon-loading"
+      class="h-full border overflow-y-auto scroll-bar pt-20"
+      node-key="id"
+      :props="{
+        label: (data) => data.id,
+      }"
+      :default-expand-all="expand"
+      lazy
+      :load="loadTreeChildNodes"
+      :key="treeKey"
+    >
+      <template #default="{ node, data }">
+        <div
+          class="flex flex-wrap items-center min-w-30rem space-x-2"
+          :style="{
+            minWidth: `${width - 18 * node.level - 50}px`,
+          }"
+        >
+          <div
+            class="text-dark-300 text-sm rounded px-2"
+            :class="{
+              'bg-yellow-300': !data.businessId,
+            }"
+          >
+            {{ data.businessId ? data.businessName : "未挂载设备" }}
+          </div>
+          <el-tag size="mini" type="info"> ID:{{ data.id }} </el-tag>
+          <el-tag size="mini" type="primary">
+            {{ getNodeDeviceType(data.businessTableName) }}
+          </el-tag>
+          <el-tag size="mini" type="primary"> 等级 {{ data.businessData.level }} </el-tag>
+          <div class="flex-grow"></div>
+          <el-button
+            type="text"
+            @click.stop="handleDeleteDevice(data.id)"
+            icon="el-icon-delete"
+            class="!text-red-500 !hover:text-red-400"
+            size="mini"
+          >
+            删除
+          </el-button>
+          <el-button
+            type="text"
+            @click.stop="handleAddChildDevice(data.id, data.businessData.level)"
+            icon="el-icon-plus"
+            size="mini"
+          >
+            新增子级
+          </el-button>
+          <el-button
+            type="text"
+            @click.stop="
+              handleEditDevice(data.id, data.parentId, data.businessData.level)
+            "
+            icon="el-icon-edit"
+            size="mini"
+          >
+            编辑
+          </el-button>
+          <el-button
+            type="text"
+            @click.stop="handleConfigDevice(data.id)"
+            icon="el-icon-setting"
+            size="mini"
+          >
+            配置
+          </el-button>
+        </div>
+      </template>
+    </el-tree>
+
     <div
       fixed="~"
       top="3"
@@ -29,7 +107,9 @@
       items="center"
     >
       <i i-mdi-family-tree text="sky-600 2xl" m="x-3"></i>
-      <h1 text="dark-100 lg" font="bold">设备拓扑树</h1>
+      <h1 text="dark-100 lg" font="bold">
+        {{ showGraph ? "设备拓扑紧凑树图" : "设备拓扑树型列表" }}
+      </h1>
       <div flex="grow"></div>
       <el-button
         size="mini"
@@ -39,6 +119,16 @@
         @click="expandTree"
       >
         加载全部
+      </el-button>
+
+      <el-button
+        size="mini"
+        type="primary"
+        icon="i-mdi-swap-horizontal"
+        plain
+        @click="toggleGraph()"
+      >
+        {{ showGraph ? "树型列表" : "拓扑树图" }}
       </el-button>
     </div>
 
@@ -56,19 +146,15 @@
       :electricity-box-dict="electricityBoxDict"
       :sensor-dict="sensorDict"
       :switch-dict="switchDict"
-      @saved="loadTreeChildNodes"
+      @saved="reloadTree"
       @device:add="getDict"
-      @device:mount="loadTreeChildNodes"
+      @device:mount="reloadTree"
     ></MountedDeviceEditor>
   </div>
 </template>
 
 <script setup>
-import {
-  getDeviceTopoTree,
-  deleteDeviceTopoTreeNode,
-  getDeviceTopoTreeChild,
-} from "~/api/device/tree";
+import { deleteDeviceTopoTreeNode, getDeviceTopoTreeChild } from "~/api/device/tree";
 import { Notification } from "element-ui";
 import { getFlattenTreeNodes } from "~/helpers/tree";
 import Viewer from "~/device/Viewer.vue";
@@ -86,6 +172,8 @@ import {
   DeviceTopographyTables,
 } from "~/composables";
 
+const [showGraph, toggleGraph] = useToggle();
+
 const NODE_ROOT_ID = "0";
 const ROOT_NODE = {
   id: NODE_ROOT_ID,
@@ -97,14 +185,20 @@ const treeData = ref([ROOT_NODE]);
 
 const viewer = ref();
 const loading = ref(false);
-async function loadTreeChildNodes(nodeId) {
+async function loadGraphTreeChildNodes(nodeId) {
+  console.log(nodeId);
   try {
     loading.value = true;
-    const { data } = await getDeviceTopoTreeChild(nodeId);
+
     const flatten = getFlattenTreeNodes(treeData.value);
     const find = flatten.find((node) => String(node.id) === String(nodeId));
     if (find) {
-      find.children = data;
+      if (!find.children || !find.children.length || nodeId === NODE_ROOT_ID) {
+        const { data } = await getDeviceTopoTreeChild(nodeId);
+        find.children = data;
+      } else {
+        find.children = [];
+      }
     } else {
       console.log("find failed", flatten);
       console.log("find nodeId", nodeId);
@@ -123,7 +217,7 @@ async function loadTreeChildNodes(nodeId) {
 }
 
 //展开
-async function expandTree() {
+async function expandGraphTree() {
   const root = {
     ...ROOT_NODE,
   };
@@ -193,7 +287,7 @@ function getDict(tableName) {
 //删除
 async function handleDeleteDevice(id, parentId) {
   await deleteDeviceTopoTreeNode(id);
-  await loadTreeChildNodes(parentId);
+  await reloadTree(parentId);
 }
 
 //新增
@@ -214,5 +308,66 @@ async function handleEditDevice(nodeId, parentId, parentLevel) {
   currentEditNodeParentId.value = parentId;
   currentEditNodeParentLevel.value = parentLevel;
   currentEditNodeId.value = nodeId;
+}
+
+//tree
+function reloadElementTree() {
+  treeKey.value += 1;
+}
+const treeKey = ref(1000);
+//展开
+const [expand, toggleExpand] = useToggle();
+function expandElementTree() {
+  toggleExpand();
+  reloadElementTree();
+}
+
+function getNodeDeviceType(tableName) {
+  return topographyTables.find((t) => t.tableName === tableName)?.name ?? " -- ";
+}
+
+//容器
+const main = ref();
+const { width } = useElementSize(main);
+
+async function loadElementTreeChildNodes(node, resolve) {
+  try {
+    loading.value = true;
+    const parentId = node.level === 0 ? 0 : node.data.id;
+    const { data } = await getDeviceTopoTreeChild(parentId);
+    resolve(data);
+  } catch (error) {
+    Notification({
+      title: "错误",
+      message: "获取树结构失败",
+      type: "error",
+    });
+    resolve([]);
+  } finally {
+    loading.value = false;
+  }
+}
+
+function expandTree() {
+  if (showGraph.value) {
+    expandGraphTree();
+  } else {
+    expandElementTree();
+  }
+}
+async function loadTreeChildNodes(...args) {
+  if (showGraph.value) {
+    await loadGraphTreeChildNodes(...args);
+  } else {
+    await loadElementTreeChildNodes(...args);
+  }
+}
+
+async function reloadTree(...args) {
+  if (showGraph.value) {
+    await loadGraphTreeChildNodes(...args);
+  } else {
+    reloadElementTree(...args);
+  }
 }
 </script>

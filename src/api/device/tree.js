@@ -41,38 +41,16 @@ export function getDeviceTopoTreeNode(id) {
     },
   });
 }
-export function updateDeviceTopoTreeNode({
-  id,
-  parentId,
-  businessTableName,
-  businessName,
-  businessId,
-}) {
+export function updateDeviceTopoTreeNode(form) {
   return remote.postForm({
     url: "/java/topoTree/update",
-    data: {
-      id,
-      parentId,
-      businessTableName,
-      businessName,
-      businessId,
-    },
+    data: form,
   });
 }
 
-export function addDeviceTopoTreeNode({
-  businessId,
-  businessName,
-  businessTableName,
-  parentId,
-}) {
+export function addDeviceTopoTreeNode(form) {
   return remote.postForm({
     url: "/java/topoTree/add",
-    data: {
-      businessId,
-      businessName,
-      businessTableName,
-      parentId,
-    },
+    data: form,
   });
 }

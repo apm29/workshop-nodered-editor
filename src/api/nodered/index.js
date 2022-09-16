@@ -1,4 +1,8 @@
 import { remote } from "~/composables";
+
+export * from "./node-template"
+export * from "./flow-template"
+
 export function getNodeRedJsonByFlowId(flowId) {
   return remote.postForm({
     url: "/java/nodeRed/getTabJsonById",

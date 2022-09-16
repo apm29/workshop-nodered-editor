@@ -14,7 +14,10 @@
         <el-tag class="font-bold"> {{ parentLevel }}级 </el-tag>
       </el-form-item>
       <el-form-item label="设备类型" required prop="businessTableName">
-        <el-select v-model="mountedFormData.businessTableName">
+        <el-select
+          v-model="mountedFormData.businessTableName"
+          @change="mountedFormData.businessId = null"
+        >
           <el-option
             v-for="option of typeDict"
             :key="option.name"
@@ -98,6 +101,15 @@
           添加设备
         </el-button>
       </el-form-item>
+      <template v-if="isMount485Net">
+        <el-form-item label="WS发送URL">
+          <el-input v-model="mountedFormData.wsOut"></el-input>
+        </el-form-item>
+        <el-form-item label="WS接收URL">
+          <el-input v-model="mountedFormData.wsIn"></el-input>
+        </el-form-item>
+      </template>
+
       <el-form-item>
         <el-alert
           v-if="mountedFormData.level < parentLevel && parentId"
@@ -213,6 +225,8 @@ async function handleSaveMountedDevice() {
       businessTableName: mountedFormData.value.businessTableName,
       businessName: mountedFormData.value.businessName,
       businessId: mountedFormData.value.businessId,
+      "node_red_websocket_out:1:path": mountedFormData.value.wsOut,
+      "node_red_websocket_in:1:path": mountedFormData.value.wsIn,
     });
   } else {
     //编辑当前
@@ -222,6 +236,8 @@ async function handleSaveMountedDevice() {
       businessTableName: mountedFormData.value.businessTableName,
       businessName: mountedFormData.value.businessName,
       businessId: mountedFormData.value.businessId,
+      "node_red_websocket_out:1:path": mountedFormData.value.wsOut,
+      "node_red_websocket_in:1:path": mountedFormData.value.wsIn,
     });
   }
   emits("device:mount", parentId.value);
@@ -240,6 +256,8 @@ async function getDeviceMounted(id) {
         businessId: mountedDevice.businessId,
         businessName: mountedDevice.businessName,
         businessTableName: mountedDevice.businessTableName,
+        wsOut: null,
+        wsIn: null,
       };
     } catch (error) {
       console.log(error);
@@ -252,6 +270,8 @@ async function getDeviceMounted(id) {
       businessTableName: null,
       businessName: null,
       businessId: null,
+      wsOut: "ws://127.0.0.1/out",
+      wsIn: "ws://127.0.0.1/in",
     };
   }
 }
@@ -263,6 +283,8 @@ const mountedFormData = ref({
   businessName: null,
   businessId: null,
   level: null,
+  wsOut: "ws://127.0.0.1/out",
+  wsIn: "ws://127.0.0.1/in",
 });
 
 watch(id, getDeviceMounted, { immediate: true });

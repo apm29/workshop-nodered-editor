@@ -1,26 +1,44 @@
 <template>
-  <div flex="~ wrap" p="x-12 y-10" items="start" justify="around" gap="8" bg="dark-500">
-    <router-link class="router-link" to="/device-maintanence">
-      <i i-mdi-devices></i>
-      设备维护
-    </router-link>
-    <router-link class="router-link" to="/device-topography">
-      <i i-carbon-container-services></i>
-      设备拓扑
-    </router-link>
-    <router-link class="router-link" to="/device-config">
-      <i i-carbon-cloud-services></i>
-      设备配置
-    </router-link>
+  <div bg="dark-500">
+    <div grid="~ xl:cols-6 lg:cols-4 md:cols-3 sm:cols-2 cols-1 " p="x-12 y-10" gap="8">
+      <router-link class="router-link" to="/device-maintanence">
+        <i i-mdi-devices></i>
+        设备维护
+      </router-link>
+      <router-link class="router-link" to="/device-topography">
+        <i i-carbon-container-services></i>
+        设备拓扑
+      </router-link>
+      <router-link class="router-link" to="/device-config">
+        <i i-carbon-cloud-services></i>
+        设备配置
+      </router-link>
+
+      <router-link class="router-link" to="/node/node-template">
+        <i i-carbon-pcn-p-node></i>
+        节点模板
+      </router-link>
+      <router-link class="router-link" to="/node/flow-template">
+        <i i-carbon-ibm-cloud-pak-manta-automated-data-lineage></i>
+        流程模板
+      </router-link>
+      <router-link class="router-link" to="/test" v-if="isDevelopmentMode">
+        <i i-carbon-ai-status-complete></i>
+        测试
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { isMobile } from "~/helpers/device";
 import { useRouter } from "~/composables";
+
+const isDevelopmentMode = import.meta.env.MODE === "development";
+
 const router = useRouter();
 if (isMobile()) {
-  router.push("/mobile");
+  router.replace("/mobile");
 }
 </script>
 

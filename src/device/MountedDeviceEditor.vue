@@ -110,6 +110,15 @@
         </el-form-item>
       </template>
 
+      <template v-if="isMountCollector">
+        <el-form-item label="FUNC">
+          <el-input v-model="mountedFormData.func"></el-input>
+        </el-form-item>
+        <el-form-item label="RULES">
+          <el-input v-model="mountedFormData.rules"></el-input>
+        </el-form-item>
+      </template>
+
       <el-form-item>
         <el-alert
           v-if="mountedFormData.level < parentLevel && parentId"
@@ -227,6 +236,8 @@ async function handleSaveMountedDevice() {
       businessId: mountedFormData.value.businessId,
       "node_red_websocket_out:1:path": mountedFormData.value.wsOut,
       "node_red_websocket_in:1:path": mountedFormData.value.wsIn,
+      "node_red_function:1:func": mountedFormData.value.func,
+      "node_red_switch:1:rules": mountedFormData.value.rules,
     });
   } else {
     //编辑当前
@@ -238,6 +249,8 @@ async function handleSaveMountedDevice() {
       businessId: mountedFormData.value.businessId,
       "node_red_websocket_out:1:path": mountedFormData.value.wsOut,
       "node_red_websocket_in:1:path": mountedFormData.value.wsIn,
+      "node_red_function:1:func": mountedFormData.value.func,
+      "node_red_switch:1:rules": mountedFormData.value.rules,
     });
   }
   emits("device:mount", parentId.value);
@@ -258,6 +271,8 @@ async function getDeviceMounted(id) {
         businessTableName: mountedDevice.businessTableName,
         wsOut: null,
         wsIn: null,
+        func: "",
+        rules: "",
       };
     } catch (error) {
       console.log(error);
@@ -272,6 +287,8 @@ async function getDeviceMounted(id) {
       businessId: null,
       wsOut: "ws://127.0.0.1/out",
       wsIn: "ws://127.0.0.1/in",
+      func: "",
+      rules: "",
     };
   }
 }
@@ -285,6 +302,8 @@ const mountedFormData = ref({
   level: null,
   wsOut: "ws://127.0.0.1/out",
   wsIn: "ws://127.0.0.1/in",
+  func: "",
+  rules: "",
 });
 
 watch(id, getDeviceMounted, { immediate: true });

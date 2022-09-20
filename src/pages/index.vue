@@ -26,6 +26,10 @@
         <i i-carbon-ai-status-complete></i>
         测试
       </router-link>
+      <router-link class="router-link" to="/settings">
+        <i i-carbon-settings></i>
+        设置
+      </router-link>
     </div>
   </div>
 </template>

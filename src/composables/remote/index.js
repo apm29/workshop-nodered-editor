@@ -2,8 +2,7 @@ import axios from "axios";
 import qs from "qs";
 axios.defaults.withCredentials = true; // 是否允许跨域
 axios.defaults.timeout = 20000;
-axios.defaults.baseURL =
-  import.meta.env.VITE_BASE_URL + import.meta.env.VITE_BASE_PATH;
+axios.defaults.baseURL = "/";
 axios.defaults.validateStatus = (status) => true;
 /**
  * 请求工具类

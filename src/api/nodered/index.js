@@ -8,7 +8,8 @@ export function getNodeRedJsonByFlowId(flowId) {
     url: "/java/nodeRed/getTabJsonById",
     data: {
       id: flowId
-    }
+    },
+    showErrorMessage:false
   })
 }
 

@@ -40,6 +40,10 @@ export function useNodes(getFlowIdFn) {
       nodes.value = flows.filter(f => NodeTypes.includes(f.type))
       configs.value = flows.filter(f => ConfigTypes.includes(f.type))
       tabs.value = [res?.data ?? {}]
+    }).catch((err) => {
+      nodes.value = []
+      configs.value = []
+      tabs.value = []
     })
   }
   watch(flowId, pullNodesFromServer, { immediate: true })

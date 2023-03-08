@@ -1,5 +1,5 @@
 import { ref, watch } from "vue";
-import { useThrottleFn } from "@vueuse/shared";
+import { useThrottleFn } from "@vueuse/core";
 import { createNodeId } from "../biz/id";
 export function useEditorEvent(
   getGraphFn,

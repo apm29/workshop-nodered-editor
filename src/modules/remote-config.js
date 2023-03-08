@@ -29,7 +29,9 @@ export const install = () => {
             }
             resolve(axiosResponse.data);
           } else {
-            Message.error(axiosResponse.data.msg || axiosResponse.data.text);
+            if (option.showErrorMessage) {
+              Message.error(axiosResponse.data.msg || axiosResponse.data.text);
+            }
             reject(axiosResponse.data.msg);
           }
         } else {
